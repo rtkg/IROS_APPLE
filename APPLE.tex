@@ -1,0 +1,77 @@
+
+\documentclass[usletter, 10pt, conference]{ieeeconf}
+\newcommand{\mbm}[1]{\mbox{\boldmath $#1$}}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\superscript}[1]{\ensuremath{^{\textrm{#1}}}}
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
+\usepackage[ruled]{algorithm2e}
+\usepackage{subfigure}
+\usepackage{graphicx,color,psfrag}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bigdelim}
+\usepackage{dsfont}
+\usepackage{color, soul}
+%\usepackage{graphicx}
+%\usepackage{caption}
+%\usepackage{subcaption}
+
+\overrideIEEEmargins
+\title{The Autonomous Picking \& Palletizing (APPLE) Robot:\\ A Research Platform for
+  Intralogistics Applications} 
+
+% Multiple authors
+\author{ \authorblockN{Robert Krug\superscript{*}, Todor Stoyanov\superscript{*}, Vinicio
+    Tincani\superscript{\ddag}, Henrik Andreasson\superscript{*},\\ Rafael Mosberger\superscript{*},
+    Gualtiero Fantoni\superscript{\ddag}, Achim J. Lilienthal\superscript{*} and Antonio
+    Bicchi\superscript{\ddag}}
+ %\authorblockA{\superscript{*}AASS Research Center, {\"O}rebro University, Sweden}
+}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+%
+\blfootnote{\hspace{-4.5mm} \superscript{*} AASS Research Center; {\"O}rebro University; Studentgatan 1, 70182 {\"O}rebro, Sweden.\\
+  \superscript{\ddag} Interdepart. Research Center ``E. Piaggio''; University of Pisa, Via Diotisalvi 2, 56100 Pisa, Italy.}
+%
+\begin{abstract}
+  \hl{Todo ...}
+\end{abstract}
+%
+%\input{Introduction} 
+%
+%\input{RelatedWork}
+%
+%\input{GraspPlanning}
+%
+%\input{Results}
+%
+%\input{Discussion}
+%
+% \section*{Acknowledgments}
+% %
+% This research has been partially supported by the \mbox{ROBLOG} project, funded by the European
+% \mbox{Community's} \mbox{Seventh} Framework Programme (FP7/2007-2013) under grant agreement ICT-270350.
+% %
+\bibliographystyle{IEEEtran}
+\bibliography{References}
+
+% \newpage
+% REMARKS:
+% \begin{itemize}
+% \item cite the books stating that shifting of initial states is not a problem
+% \end{itemize}
+
+\end{document}
+
+
+
