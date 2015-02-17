@@ -3,17 +3,70 @@
 
 \subsection{AGV Naviagation}
 \label{subsec:navigation}
-
+%
+This module ensures that the AGV is capable to move autonomously and safely through the workspace
+environment. In order to achieve this task, we use components of a navigation system previously
+developed in the context of our KKS-funded Safe Autonomous Vehicles (SAUNA) project. We construct a
+3D map of the static parts of the environment (using~\cite{Stoy13}) and use it to localize the
+vehicle in the presence of dynamic entities (using~\cite{Vale14}). For motion planning and control
+of the non-holonomic AGV, we will our lattice planner~\cite{Ciri14} and a model-predictive tracking
+controller. The complete navigation system has been implemented, extensively tested and successfully
+integrated on the APPLE demonstrator, a detailed description can be found in~\cite{Andr15}.
+%
 \subsection{People Detection}
 \label{subsec:people_det}
-
+%
+As the envisioned mobile manipulation system will operate in environments shared with human workers,
+people detection and human safety are important issues. In APPLE we address the problem by using the
+RefleX system we recently developed~\cite{Mosb14}. RefleX is a camera-based on-board safety system
+for industrial vehicles and machinery for detection of human workers wearing reflective vests worn
+as per safety regulations. The system was designed with industrial safety standards in mind and is
+currently being tested as an industrial prototype.
+%
 \subsection{Object Perception and Grasp Planning}
 \label{subsec:perception_planning}
-
+%
+In order to detect target objects, we use an Asus Xtion Pro RGB-D camera, mounted on the wrist of
+the KUKA LBR iiwa. Pallet detection and picking is adopted from our previous work on the KKS SAUNA
+project, standard processing algorithms from the Point Cloud Library~\cite{Rusu11}~are employed for
+target object detection. Instead of representing grasps as discrete gripper wrist poses and joint
+configurations, we use grasp interval regions as depicted in Fig.~\ref{fig:grasp_interval}. These
+grasp intervals can easily be transcribed as target tasks for the manipulator motion control and
+allow for redundancy in the manipulator wrist positioning which eases reach-to-grasp
+acquisition. Grasp interval formulation depends on the specific target object and has to be verified
+experimentally. For now, we constrain ourselves to cylindrical objects as shown in
+Fig.~\ref{fig:grasp_interval}. We then rely on the inherent capabilities of the grasping device and
+the compliance of the system for successful grasp execution as stated below.
+%
 \subsection{Manipulator Motion Generation}
 \label{subsec:manip_motion}
-
+%
+For reactive on-the-fly motion generation we formulate a stack of hierarchical tasks and use the
+recently developed method by Kanoun et al.~\cite{Kano11}, which allows to account for inequality
+tasks and solves a sequence of convex optimization problems at each time step to obtain
+appropriate joint velocity commands (the method also can be used to directly generate torque
+commands while accounting for the robot dynamics~\cite{Saab13}).
+ 
+Obstacle avoidance is also achieved on a control-level, by formulating tasks which maintain minimum
+distances between simple geometric primitives such as spheres, planes, points and capsules. We argue
+that for the considered application strict collision avoidance is neither necessary nor desired,
+since picking and manipulation inherently necessitates contact events between the robot and the
+environment. Also, in real-world applications where knowledge about the environment is available
+only in form of noisy sensor data, it might not be possible to avoid contacting the environment
+without being overly conservative. This makes the KUKA LBR iiwa with its compliant low-level control
+schemes and contact detection abilities an ideal platform for the tackled purpose and motion
+generation scheme. The relatively simple picking task in APPLE provides an ideal testbed in a
+real-world scenario.
+%
 \subsection{Robust Grasp Execution}
 \label{subsec:grasp_execution}
-
+%
+For this component, we adopted the approach we developed in RobLog and leverage the capabilities of
+the Velvet Gripper, namely underactuation and conveyor belts on the finger pads in order to achieve
+robust grasping behavior. Especially in cluttered scenes, a ``pull-in'' strategy has been shown to
+be especially effective to achieve stable grasps while starting from a relatively wide range of
+initial gripper poses with respect to the target object~\cite{Krug14a}. Here, the features of the
+grasping device are exploited to embrace the object in a firm envelope grasp by simultaneously
+squeezing it in a compliant fashion while actuating the belts inwards.
+%
 
