@@ -55,13 +55,15 @@
     \put(0.39950067,0.41712952){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$z$}}}%
     \put(0.39408308,0.36695679){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$o$}}}%
     \put(0.36021865,0.44596197){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\hat{\mathbf{a}}$}}}%
-    \put(0.18925304,0.26580327){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\mathbf{a}$}}}%
+    \put(0.21744701,0.26338505){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\mathbf{a}$}}}%
     \put(0.93530643,0.4195988){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$z$}}}%
     \put(0.97587175,0.33479321){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$y$}}}%
     \put(0.85360465,0.34125196){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$x$}}}%
     \put(0.92781284,0.36696799){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$o$}}}%
-    \put(0.75182152,0.25827421){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\varphi$}}}%
+    \put(0.76633076,0.25162412){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\varphi$}}}%
     \put(0.90134483,0.19629276){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$c$}}}%
     \put(0.90341262,0.15413614){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$h$}}}%
+    \put(0.14489583,0.24915856){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$r_1$}}}%
+    \put(0.17397595,0.29165772){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$r_2$}}}%
   \end{picture}%
 \endgroup%
