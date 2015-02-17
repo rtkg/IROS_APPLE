@@ -1,6 +1,6 @@
 \section{System Architecture}
 \label{sec:arch}
-
+%
 \subsection{AGV Naviagation}
 \label{subsec:navigation}
 %
@@ -12,6 +12,8 @@ vehicle in the presence of dynamic entities (using~\cite{Vale14}). For motion pl
 of the non-holonomic AGV, we will our lattice planner~\cite{Ciri14} and a model-predictive tracking
 controller. The complete navigation system has been implemented, extensively tested and successfully
 integrated on the APPLE demonstrator, a detailed description can be found in~\cite{Andr15}.
+
+
 %
 \subsection{People Detection}
 \label{subsec:people_det}
@@ -23,13 +25,39 @@ for industrial vehicles and machinery for detection of human workers wearing ref
 as per safety regulations. The system was designed with industrial safety standards in mind and is
 currently being tested as an industrial prototype.
 %
-\subsection{Object Perception and Grasp Planning}
-\label{subsec:perception_planning}
+\subsection{Object Perception}
+\label{subsec:perception}
 %
 In order to detect target objects, we use an Asus Xtion Pro RGB-D camera, mounted on the wrist of
 the KUKA LBR iiwa. Pallet detection and picking is adopted from our previous work on the KKS SAUNA
 project, standard processing algorithms from the Point Cloud Library~\cite{Rusu11}~are employed for
-target object detection. Instead of representing grasps as discrete gripper wrist poses and joint
+target object detection.
+%
+\subsection{Grasp Planning}
+\label{subsec:grasp_planning}
+
+\cite{Bohg14}(data driven grasping)
+(SotA autonomous grasping systems) 
+\cite{Pas13} cylinder shell fitting
+
+The key challenge for many applications of robotic mobile manipulation is autonomous grasping in
+uncertain real-world environments. Finding collision-free trajec- tories leading the gripper-arm
+chain from a given initial to a reachable final state (grasp planning together with vehicle and
+manipulator motion planning) constitutes the fundament for any robot manipulation system. Currently,
+despite of a large research effort, no commercially viable solution is available for this
+problem. In today’s state-of-the-art autonomous grasping systems~\cite{Bere07, Srin10, Krug14a},
+grasp planning and motion planning are usually seen as independent sub-problems~\cite{Dian10}. A
+database storing object models together with pre-computed grasps is used to relax the need to find
+suitable gripper poses/configurations~\cite{Mill04, Gold11, Krug14a}. In the online stage, sampling
+based planners~\cite{LaVa06} attempt to generate valid trajectories for the pre-planned grasps,
+which are executed in a feasible-first manner~\cite{Bere07}. During the execution phase, such
+approaches necessitate many futile motion planning attempts, which often incurs significant time
+delays since sampling based planners suffer from the curse of dimensionality. Also, while being able
+to solve complicated planning problems if given enough time, these planners don’t scale well to
+geometrically simple scenarios~\cite{Ratl09} and they are ill suited to incorporate contact events
+with the environment.
+
+ Instead of representing grasps as discrete gripper wrist poses and joint
 configurations, we use grasp interval regions as depicted in Fig.~\ref{fig:grasp_interval}. These
 grasp intervals can easily be transcribed as target tasks for the manipulator motion control and
 allow for redundancy in the manipulator wrist positioning which eases reach-to-grasp
@@ -37,10 +65,16 @@ acquisition. Grasp interval formulation depends on the specific target object an
 experimentally. For now, we constrain ourselves to cylindrical objects as shown in
 Fig.~\ref{fig:grasp_interval}. We then rely on the inherent capabilities of the grasping device and
 the compliance of the system for successful grasp execution as stated below.
+
+
+\cite{Bala12}(Identifying grasp principles from humans) \cite{Gien08a, Gien08b, Vahr10}(Task maps with RRT)
 %
 \subsection{Manipulator Motion Generation}
 \label{subsec:manip_motion}
 %
+\cite{Esca14}(Notation) \cite{Sams91}(task functions)
+~\cite{Sici91, Sent10}(Redundant motion generation)
+
 For reactive on-the-fly motion generation we formulate a stack of hierarchical tasks and use the
 recently developed method by Kanoun et al.~\cite{Kano11}, which allows to account for inequality
 tasks and solves a sequence of convex optimization problems at each time step to obtain
@@ -57,16 +91,39 @@ without being overly conservative. This makes the KUKA LBR iiwa with its complia
 schemes and contact detection abilities an ideal platform for the tackled purpose and motion
 generation scheme. The relatively simple picking task in APPLE provides an ideal testbed in a
 real-world scenario.
+
+\cite{Kano09}(Task function descriptions)
 %
 \subsection{Robust Grasp Execution}
 \label{subsec:grasp_execution}
 %
-For this component, we adopted the approach we developed in RobLog and leverage the capabilities of
-the Velvet Gripper, namely underactuation and conveyor belts on the finger pads in order to achieve
-robust grasping behavior. Especially in cluttered scenes, a ``pull-in'' strategy has been shown to
-be especially effective to achieve stable grasps while starting from a relatively wide range of
-initial gripper poses with respect to the target object~\cite{Krug14a}. Here, the features of the
-grasping device are exploited to embrace the object in a firm envelope grasp by simultaneously
-squeezing it in a compliant fashion while actuating the belts inwards.
-%
+For this component, we leverage the capabilities of the Velvet Gripper, namely underactuation and
+conveyor belts on the finger pads in order to achieve robust grasping behavior. Especially in
+cluttered scenes, a ``pull-in'' strategy has been shown to be especially effective to achieve stable
+grasps while starting from a relatively wide range of initial gripper poses with respect to the
+target object~\cite{Krug14a}. Here, the features of the grasping device are exploited to embrace the
+object in a firm envelope grasp by simultaneously squeezing it in a compliant fashion while
+actuating the belts inwards.
+
+(\hl{the following is copy/pasted from the Gripper control workshop paper})~\cite{Krug14c} Each of
+the gripper’s two fingers has a planar manipulator structure with two joints and active surfaces
+which are implemented by coupled conveyor belts on the inside of the two phalanges. The mechanical
+structure is underactuated and comprises only one actuated Degree of Freedom (DoF) for opening and
+closing and two DoF for the belt movements.  If, during grasping, the proximal phalanges are blocked
+by an object, the gripper’s distal phalanges continue to “wrap around” and envelope it in a firm
+grasp.  The experiments reported in~\cite{Krug14a} showed, that in cluttered scenes fingertip
+grasps are more likely to be feasible than robust enveloping grasps, because the latter necessitate
+large opening angles resulting in bulky gripper silhouettes for which no collision free approach
+trajectories can be found. Therefore, we employ the “pull-in” strategy which is illustrated in
+Fig.~\ref{nothereyet}. Here, the underactuated nature and the conveyor belts on the grasping device
+are exploited to embrace the object in a firm envelope grasp by simultaneously squeezing it while
+actuating the belts inwards. This is achieved by compliant low-level position controllers which
+saturate on experimentally evaluated current thresholds. We use a simple grasping routine which is
+triggered after an initial fingertip grasp is achieved (see Fig.~\ref{nothereyet}). This routine
+consists of issuing commands to fully close the gripper while moving the belts a pre-defined offset
+towards the palm. Three thresholds on the current absorption of the opening motor are used: a low
+threshold (LT) signifies contact between the gripper and the object and a mid threshold (MT)
+indicates a large enough contact force to stop the closing movement.  Finally, an upper threshold
+(UT) prevents damage to the grasping device. Once the pull-in sequence is completed, the controllers
+maintain the final torques to ensure a stable grasp.
 

@@ -1,6 +1,7 @@
 @string{iros="Proc. of the IEEE/RSJ International Conference on Intelligent Robots and Systems"}
 @string{icra="Proc. of the IEEE International Conference on Robotics and Automation"}
 @string{icar="Proc. of the International Conference on Advanced Robotics"}
+@string{humanoids="Proc. IEEE/RAS International Conference on Humanoid Robots"}
 @string{ijrr="International Journal of Robotics Research"}
 @string{tro="IEEE Transactions on Robotics"}
 @string{auro="Autonomous Robots"}
@@ -15,10 +16,17 @@
   pages={3669--3675}
 } 
 
+@inproceedings{Krug14c,
+  author = {R. Krug and T. Stoyanov and M. Bonilla and V. Tincani and N. Vaskevicius and G. Fantoni and A. Birk and A. J. Lilienthal and A. Bicchi},
+  title = {Improving Grasp Robustness via In-Hand Manipulation with Active Surfaces},
+  booktitle = {IEEE International Conference on Robotics and Automation - Workshop on Autonomous Grasping and Manipulation: An Open Challenge},
+  year = {2014},
+} 
+
 @inproceedings{Bere07,
   author = "Berenson, D. and Diankov, R. and Nishiwaki, K. and Kagami, S. and Kuffner, J.",
   title = "Grasp Planning in Complex Scenes",
-  booktitle = "Proc. IEEE/RAS International Conference on Humanoid Robots",
+  booktitle = humanoids,
   year = "2007",
   pages={42--48}, 
 }
@@ -49,7 +57,7 @@
   year = {2011},
 }
 
-@book{Lava06,
+@book{LaVa06,
   author = {S. M. LaValle},
   title  = {Planning Algorithms},
   publisher = {Cambridge University Press},
@@ -89,16 +97,6 @@
   author={Platt, R.},
   school = {University of Massachusetts Amherst},
   year={2006},
-}
-
-@article{Bala12, 
-  author={Balasubramanian, R. and Ling Xu and Brook, P.D. and Smith, J.R. and Matsuoka, Y.}, 
-  journal=tro,
-  title={Physical Human Interactive Guidance: Identifying Grasping Principles From Human-Planned Grasps}, 
-  year={2012}, 
-  volume={28}, 
-  number={4}, 
-  pages={899--910}, 
 }
 
 @inproceedings{Tinc12, 
@@ -245,16 +243,6 @@
   year={2013},
 }
 
-@article{Khat04,
-  title={Whole-body dynamic behavior and control of human-like robots},
-  author={Khatib, Oussama and Sentis, Luis and Park, Jaeheung and Warren, James},
-  journal=ijrr,
-  volume={1},
-  number={1},
-  pages={29--43},
-  year={2004},
-}
-
 @article{Sent10,
   title={Compliant control of multicontact and center-of-mass behaviors in humanoid robots},
   author={Sentis, Luis and Park, Jaeheung and Khatib, Oussama},
@@ -326,4 +314,66 @@
   booktitle=iros,
   pages={2484--2490},
   year={2006},
+}
+
+@inproceedings{Quig09,
+  title={{ROS:} an open-source Robot Operating System},
+  author={Quigley, Morgan and Conley, Ken and Gerkey, Brian and Faust, Josh and Foote, Tully and Leibs, Jeremy and Wheeler, Rob and Ng, Andrew Y},
+  booktitle={IEEE International Conference on Robotics and Automation - Workshop on open source software},
+  volume={3},
+  number={3.2},
+  pages={5},
+  year={2009}
+}
+
+@phdthesis{Kano09,
+  author = {Oussama Kanoun},
+  title = {Contribution \`{a} la planification de mouvement pour robots humano\"{i}des},
+  school = {l'{Universit\'{e}} {Toulouse} {III} - {Paul} {Sabatier}},
+  year = {2009},
+}
+
+@inproceedings{Gien08a,
+  title={Task maps in humanoid robot manipulation},
+  author={Gienger, Michael and Toussaint, Marc and Goerick, Christian},
+  booktitle=iros,
+  pages={2758--2764},
+  year={2008},
+}
+
+@inproceedings{Gien08b,
+  title={Optimization of fluent approach and grasp motions},
+  author={Gienger, Michael and Toussaint, Marc and Jetchev, Nikolay and Bendig, Achim and Goerick, Christian},
+  booktitle=humanoids,
+  pages={111--117},
+  year={2008},
+
+}
+
+@inproceedings{Vahr10,
+  title={Integrated grasp and motion planning},
+  author={Vahrenkamp, Niko and Do, Martin and Asfour, Tamim and Dillmann, R{\"u}diger},
+  booktitle=icra,
+  pages={2883--2888},
+  year={2010},
+}
+
+@article{Bohg14,
+  title={Data-driven grasp synthesis—a survey},
+  author={Bohg, Jeannette and Morales, Antonio and Asfour, Tamim and Kragic, Danica},
+  journal=tro,
+  volume={30},
+  number={2},
+  pages={289--309},
+  year={2014}
+}
+
+@article{Bala12,
+  author={Balasubramanian, R. and Ling Xu and Brook, P.D. and Smith, J.R. and Matsuoka, Y.}, 
+  journal=tro,
+  title={Physical Human Interactive Guidance: Identifying Grasping Principles From Human-Planned Grasps}, 
+  volume={28}, 
+  number={4}, 
+  pages={899--910}, 
+  year={2012}
 }
