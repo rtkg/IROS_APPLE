@@ -8,6 +8,7 @@ eg/eg.*
 *.mp4
 *.log
 *.bbl
+*.blg
 *.autosave
 *.bak
 *.off
