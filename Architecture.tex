@@ -1,6 +1,26 @@
 \section{System Architecture}
 \label{sec:arch}
 %
+%
+\begin{figure}[t!]
+\begin{center}
+\includegraphics[width =1\linewidth]{figs/apple_demonstrator}
+%\vspace{-0.25cm}
+\caption{\textit{The APPLE demonstrator:} A KUKA LBR iiwa (5) is mounted on a CitiTruck AGV (4). The
+  projector (3) is used to display path information during AGV driving. The depicted Velvet Fingers
+  gripper (2) is a further developed and smaller version of the gripper used in the FP7 IP project
+  RobLog. Each of the gripper’s two fingers has a planar RR manipulator structure with two rotary
+  joints and active surfaces which are implemented by conveyor belts on the inside of the two
+  phalanges. The mechanical structure of each finger is underactuated and comprises one actuated
+  Degree of Freedom (DoF) for opening and closing and two DoF for the belt movements. If, during
+  grasping, the proximal phalanges are blocked by an object, the gripper’s distal phalanges continue
+  to “wrap around” and envelope it in a firm grasp. Object and pallet detection is done with
+  an ASUS Xtion Pro camera (1) which is mounted on the gripper's palm.}
+\label{fig:robot}
+%\vspace{-0.65cm}
+\end{center}
+\end{figure}
+%
 \subsection{AGV Naviagation}
 \label{subsec:navigation}
 %
@@ -35,10 +55,16 @@ target object detection.
 %
 \subsection{Grasp Planning}
 \label{subsec:grasp_planning}
+\begin{figure*}[t!] 
+   \centering
+    %\def\svgwidth{200pt} 
+    \input{figs/grasp_interval.pdf_tex} 
+   \caption{\textit{Grasp interval:} (Left) todo ... (Right) truncated grasp interval ...} 
+   \label{fig:grasp_interval}
+\end{figure*}
 
-\cite{Bohg14}(data driven grasping)
-(SotA autonomous grasping systems) 
-\cite{Pas13} cylinder shell fitting
+\cite{Bohg14}(data driven grasping) (SotA autonomous grasping systems) \cite{Pas13} cylinder shell
+fitting
 
 The key challenge for many applications of robotic mobile manipulation is autonomous grasping in
 uncertain real-world environments. Finding collision-free trajec- tories leading the gripper-arm
@@ -96,6 +122,20 @@ real-world scenario.
 %
 \subsection{Robust Grasp Execution}
 \label{subsec:grasp_execution}
+%
+\begin{figure*}[!t]
+ \centering
+   \subfigure[]{\includegraphics[width = .32\linewidth]{figs/vcg1}}
+   \subfigure[]{\includegraphics[width = .32\linewidth]{figs/vcg2}}
+   \subfigure[]{\includegraphics[width = .32\linewidth]{figs/vcg3}}
+   \caption{\textit{Grasp Execution Control:} As the open griper closes in on the object (Left), the
+     current through the opening motor is monitored. When contact is made (Middle), the actuated
+     belts are switched on to pull in the object. The controller then strives to maintain the
+     current in between two target thresholds by opening or closing the gripper during in-hand
+     manipulation (Right).}
+   \label{fig:pull_in_control}
+ \centering
+\end{figure*}
 %
 For this component, we leverage the capabilities of the Velvet Gripper, namely underactuation and
 conveyor belts on the finger pads in order to achieve robust grasping behavior. Especially in

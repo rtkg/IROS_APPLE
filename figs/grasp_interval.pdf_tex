@@ -1,0 +1,67 @@
+%% Creator: Inkscape inkscape 0.48.4, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'grasp_interval.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{472.60410156bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.47277355)%
+    \put(0,0){\includegraphics[width=\unitlength]{figs/grasp_interval.pdf}}%
+    \put(0.43882231,0.33724013){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$y$}}}%
+    \put(0.3159507,0.33946708){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$x$}}}%
+    \put(0.39950067,0.41712952){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$z$}}}%
+    \put(0.39408308,0.36695679){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$o$}}}%
+    \put(0.36021865,0.44596197){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\hat{\mathbf{a}}$}}}%
+    \put(0.18925304,0.26580327){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\mathbf{a}$}}}%
+    \put(0.93530643,0.4195988){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$z$}}}%
+    \put(0.97587175,0.33479321){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$y$}}}%
+    \put(0.85360465,0.34125196){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$x$}}}%
+    \put(0.92781284,0.36696799){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$o$}}}%
+    \put(0.75182152,0.25827421){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\varphi$}}}%
+    \put(0.90134483,0.19629276){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$c$}}}%
+    \put(0.90341262,0.15413614){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$h$}}}%
+  \end{picture}%
+\endgroup%
