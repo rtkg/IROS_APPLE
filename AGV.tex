@@ -1,0 +1,27 @@
+\section{Autonomous Forklift}
+\label{sec:agv}
+%
+\subsection{Navigation}
+\label{subsec:navigation}
+%
+This module ensures that the AGV is capable to move autonomously and safely through the workspace
+environment. In order to achieve this task, we use components of a navigation system previously
+developed in the context of our KKS-funded Safe Autonomous Vehicles (SAUNA) project. We construct a
+3D map of the static parts of the environment (using~\cite{Stoy13}) and use it to localize the
+vehicle in the presence of dynamic entities (using~\cite{Vale14}). For motion planning and control
+of the non-holonomic AGV, we will our lattice planner~\cite{Ciri14} and a model-predictive tracking
+controller. The complete navigation system has been implemented, extensively tested and successfully
+integrated on the APPLE demonstrator, a detailed description can be found in~\cite{Andr15}.
+
+
+%
+\subsection{People Detection}
+\label{subsec:people_det}
+%
+As the envisioned mobile manipulation system will operate in environments shared with human workers,
+people detection and human safety are important issues. In APPLE we address the problem by using the
+RefleX system we recently developed~\cite{Mosb14}. RefleX is a camera-based on-board safety system
+for industrial vehicles and machinery for detection of human workers wearing reflective vests worn
+as per safety regulations. The system was designed with industrial safety standards in mind and is
+currently being tested as an industrial prototype.
+%

@@ -34,3 +34,23 @@ architectures, in this paradigm only task-relevant Degrees of Freedom (DoF) need
 which allows to exploit kinematic redundancies, e. g., for a manipulator to avoid unexpected
 obstacles. Regarding grasp planning, we follow the general tenet and will extract redundant
 representations in form of constrained pose intervals instead of discrete poses
+%
+\begin{figure}[t!]
+\begin{center}
+\includegraphics[width =1\linewidth]{figs/apple_demonstrator}
+%\vspace{-0.25cm}
+\caption{\textit{The APPLE demonstrator:} A KUKA LBR iiwa (5) is mounted on a CitiTruck AGV (4). The
+  projector (3) is used to display path information during AGV driving. The depicted Velvet Fingers
+  gripper (2) is a further developed and smaller version of the gripper used in the FP7 IP project
+  RobLog. Each of the gripper’s two fingers has a planar RR manipulator structure with two rotary
+  joints and active surfaces which are implemented by conveyor belts on the inside of the two
+  phalanges. The mechanical structure of each finger is underactuated and comprises one actuated
+  Degree of Freedom (DoF) for opening and closing and two DoF for the belt movements. If, during
+  grasping, the proximal phalanges are blocked by an object, the gripper’s distal phalanges continue
+  to “wrap around” and envelope it in a firm grasp. Object and pallet detection is done with
+  an ASUS Xtion Pro camera (1) which is mounted on the gripper's palm.}
+\label{fig:robot}
+%\vspace{-0.65cm}
+\end{center}
+\end{figure}
+%
