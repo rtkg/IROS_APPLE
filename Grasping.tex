@@ -1,10 +1,7 @@
 \section{Grasping and Manipulation}
 \label{sec:manip}
 %
-Introduce LBR iiwa + Velvet Fingers 2 Gripper
-%
 \subsection{Grasp Planning}
-\label{subsec:grasp_planning}
 \begin{figure*}[t!] 
    \centering
     %\def\svgwidth{200pt} 
@@ -12,7 +9,9 @@ Introduce LBR iiwa + Velvet Fingers 2 Gripper
    \caption{\textit{Grasp interval:} (Left) todo ... (Right) truncated grasp interval ...} 
    \label{fig:grasp_interval}
 \end{figure*}
-
+%
+Introduce LBR iiwa + Velvet Fingers 2 Gripper
+%
 \cite{Bohg14}(data driven grasping) (SotA autonomous grasping systems) \cite{Pas13} cylinder shell
 fitting
 
@@ -55,20 +54,38 @@ We lean on the notation in~\cite{Esca14} and define the manipulator joint config
 vector $\mbm{q}$ and the control inputs as corresponding joint velocities $\dot{\mbm{q}}$. A task
 function is any derivable function of $\mbm{e}$. To give an example, a task with the purpose of
 bringing an end-effector point $\mbm{p}(\mbm{q})$ onto a plane described by unit normal $\mbm{n}$
-and offset $b$ can be transcribed by the task function $\mbm{e}=\mbm{n}^T\mbm{p}(\mbm{q})-d$ which
+and offset $b$ can be transcribed by the task function $\mbm{e}=\mbm{n}^T\mbm{p}(\mbm{q})-d$, which
 formulates the projection residual between the plane and $\mbm{p}(\mbm{q})$. The task evolution is
-given by $\dot{\mbm{e}}=\mbm{J}\dot{\mbm{q}}$ with task jacobian
+given by $\mbm{J}\dot{\mbm{q}}=\dot{\mbm{e}}$ with task jacobian
 $\mbm{J}=\frac{\partial\mbm{e}}{\partial\mbm{q}}$.
 
 Goal is to compute joint velocities such that the task evolution follows a desired reference profile
 $\dot{\mbm{e}}^*$ (often chosen as exponential decay $\mbm{e}^*= -\lambda \mbm{e}$, with $\lambda
 \in \mathbb{R}_+$). For a single equality task, this necessitates to solve the following least
-squares Quadratic Program (QP): $$\dot{q}^* \in
-\underset{\footnotesize\dot{\mbm{q}}\normalsize}{\mbox{Arg min}}
-||\mbm{J}\dot{\mbm{q}}-\dot{\mbm{e}}^*||$$
+squares Quadratic Program (QP):
+%
+\begin{align*}
+  \dot{q}^* &\in \mbox{arg} \; \underset{\footnotesize\dot{\mbm{q}}\normalsize}{\mbox{min}}||\mbm{J}\dot{\mbm{q}}-\dot{\mbm{e}}^*||
+\end{align*}
+%
+In order to allow for inequality tasks, we henceforth use a general task formulation with upper
+bounds $\mbm{J}\dot{\mbm{q} \leq \mbm{e}^*}$ as in~\cite{Esca14}. This allows to transcribe lower
+bounds $\mbm{J}\dot{\mbm{q} \geq \mbm{e}^*}$, double bounds $\dot{\underline{\mbm{e}}}^* \leq
+\mbm{J}\dot{\mbm{q} \leq \dot{\bar{\mbm{e}}}^*}$ and equalities $\mbm{J}\dot{\mbm{q}=\mbm{e}^*}$ by
+reformulating the task respectively as $-\mbm{J}\dot{\mbm{q} \leq -\mbm{e}^*}$, $\begin{bmatrix}
+  -\mbm{J} \\ \mbm{J} \end{bmatrix}\dot{\mbm{q}} \leq \begin{bmatrix} -\dot{\underline{\mbm{e}}}^*
+  \\ \dot{\bar{\mbm{e}}}^* \end{bmatrix}$ and $\begin{bmatrix} -\mbm{J} \\
+  \mbm{J} \end{bmatrix}\dot{\mbm{q}} \leq \begin{bmatrix} -\dot{\mbm{e}}^* \\
+  \dot{\mbm{e}}^* \end{bmatrix}$.
 
-
-
+If the constraint $\mbm{J}\dot{\mbm{q} \leq \mbm{e}^*}$ is infeasible, a least squares solution for
+$\mbm{q}^*$ can be found by introducing the slack variable $\mbm{w}$ in the decision variables
+%
+\begin{align}\label{eq:iQP}
+  \underset{\dot{\mbm{q}},\;\mbm{w}}{\mbox{min}}\;\;||\mbm{w}||&\\
+   \mbox{subject to} \quad \mbm{J}\dot{\mbm{q}} \geq& \mbm{e}^* + \mbm{w} \nonumber
+\end{align}
+%
 
 For reactive on-the-fly motion generation we formulate a stack of hierarchical tasks and use the
 recently developed method by Kanoun et al.~\cite{Kano11}, which allows to account for inequality
