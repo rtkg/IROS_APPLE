@@ -10,6 +10,12 @@ investigation into a UK-based Amazon warehouse, which highlighted that the dull 
 of commissioning could cause mental and physical illness in human workers. Amazon themselves took
 action by organizing their first Picking Challenge at ICRA 2015.
 
+The proposed APPLE project addresses the following important sub-task chain which occurs during
+commissioning in prototypical warehouses: picking of goods from a storage location, subsequent
+placement on a standard EUR-pallet and transport of the filled pallet to a target location. The
+process has to be carried out in a manner which is safe for humans operating in the same
+environment.
+
 The key obstacle for many application scenarios is the autonomous grasping in uncertain real-world
 environments. Currently, despite of a large research effort, no commer- cially viable solution is
 available for this problem. State of the art autonomous grasping systems~\cite{Bere07, Srin10,
@@ -39,17 +45,17 @@ representations in form of constrained pose intervals instead of discrete poses
 \begin{center}
 \includegraphics[width =0.8\linewidth]{figs/apple_demonstrator}
 %\vspace{-0.25cm}
-\caption{\textit{The APPLE demonstrator:} A KUKA LBR iiwa arm (3) is mounted on a CitiTruck AGV
-  (6). A Velodyne Lidar (4) is used for localization, human worker detection is carried out with the
-  RefleX camera system(5). The depicted Velvet Fingers gripper (2) is a further developed and
-  smaller version of the gripper used in the FP7 IP project RobLog. Each of the gripper’s two
-  fingers has a planar RR manipulator structure with two rotary joints and active surfaces which are
-  implemented by conveyor belts on the inside of the two phalanges. The mechanical structure of each
-  finger is underactuated and comprises one actuated Degree of Freedom (DoF) for opening and closing
-  and two DoF for the belt movements. If, during grasping, the proximal phalanges are blocked by an
-  object, the gripper’s distal phalanges continue to “wrap around” and envelope it in a firm
-  grasp. Object and pallet detection is done with an ASUS Xtion Pro camera (1) which is mounted on
-  the gripper's palm.}
+\caption{\textit{The APPLE demonstrator:} A KUKA LBR iiwa arm (3) is mounted on a retrofitted Linde
+  CitiTruck AGV (6). A Velodyne Lidar (4) is used for localization, human worker detection is
+  carried out with the RefleX camera system (5). The depicted Velvet Fingers gripper (2) is a further
+  developed and smaller version of the gripper used in the FP7 IP project RobLog. Each of the
+  gripper’s two fingers has a planar RR manipulator structure with two rotary joints and active
+  surfaces which are implemented by conveyor belts on the inside of the two phalanges. The
+  mechanical structure of each finger is underactuated and comprises one actuated Degree of Freedom
+  (DoF) for opening and closing and two DoF for the belt movements. If, during grasping, the
+  proximal phalanges are blocked by an object, the gripper’s distal phalanges continue to “wrap
+  around” and envelope it in a firm grasp. Object and pallet detection is done with an ASUS Xtion
+  Pro camera (1) which is mounted on the gripper's palm.}
 \label{fig:robot}
 \vspace{-0.5cm}
 \end{center}
