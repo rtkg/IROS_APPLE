@@ -1,6 +1,8 @@
 \section{Grasping and Manipulation}
 \label{sec:manip}
 %
+Introduce LBR iiwa + Velvet Fingers 2 Gripper
+%
 \subsection{Grasp Planning}
 \label{subsec:grasp_planning}
 \begin{figure*}[t!] 
@@ -49,17 +51,24 @@ the compliance of the system for successful grasp execution as stated below.
  \cite{Sams91}(task functions)
 ~\cite{Sici91, Sent10}(Redundant motion generation)
 
-We follow the notation in~\cite{Esca14} and define the manipulator joint configuration by the vector
-$\mbm{q}$ and the control inputs as corresponding joint velocities $\dot{\mbm{q}}$. A task function
-is any derivable function of $\mbm{e}$. To give an example, a task with the purpose of bringing an
-end-effector point $\mbm{p}(\mbm{q})$ onto a plane described by unit normal $\mbm{n}$ and offset $b$
-can be transcribed by the task function $\mbm{e}=\mbm{n}^T\mbm{p}(\mbm{q})-d$ which formulates the
-projection residual between the plane and $\mbm{p}(\mbm{q})$. The task evolution is given by
-$\dot{\mbm{e}}=\mbm{J}\dot{\mbm{q}}$ with task jacobian
+We lean on the notation in~\cite{Esca14} and define the manipulator joint configuration by the
+vector $\mbm{q}$ and the control inputs as corresponding joint velocities $\dot{\mbm{q}}$. A task
+function is any derivable function of $\mbm{e}$. To give an example, a task with the purpose of
+bringing an end-effector point $\mbm{p}(\mbm{q})$ onto a plane described by unit normal $\mbm{n}$
+and offset $b$ can be transcribed by the task function $\mbm{e}=\mbm{n}^T\mbm{p}(\mbm{q})-d$ which
+formulates the projection residual between the plane and $\mbm{p}(\mbm{q})$. The task evolution is
+given by $\dot{\mbm{e}}=\mbm{J}\dot{\mbm{q}}$ with task jacobian
 $\mbm{J}=\frac{\partial\mbm{e}}{\partial\mbm{q}}$.
 
 Goal is to compute joint velocities such that the task evolution follows a desired reference profile
-$\dot{\mbm{e}}^*$.
+$\dot{\mbm{e}}^*$ (often chosen as exponential decay $\mbm{e}^*= -\lambda \mbm{e}$, with $\lambda
+\in \mathbb{R}_+$). For a single equality task, this necessitates to solve the following least
+squares Quadratic Program (QP): $$\dot{q}^* \in
+\underset{\footnotesize\dot{\mbm{q}}\normalsize}{\mbox{Arg min}}
+||\mbm{J}\dot{\mbm{q}}-\dot{\mbm{e}}^*||$$
+
+
+
 
 For reactive on-the-fly motion generation we formulate a stack of hierarchical tasks and use the
 recently developed method by Kanoun et al.~\cite{Kano11}, which allows to account for inequality
