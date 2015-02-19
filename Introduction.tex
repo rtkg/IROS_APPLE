@@ -5,18 +5,23 @@ The increasing need for fast and flexible commissioning ($i.\,e.,$ order picking
 unstructured goods from storage compartments in warehouses) in logistic scenarios has created
 substantial interest for autonomous robotic solutions. One of the main arguments for automating this
 task is that the dull and strenuous nature of commissioning could cause mental and physical illness
-in human worker. As a result, the determination within the logistics sector to invest in this area
+in human workers. As a result, the determination within the logistics sector to invest in this area
 is high and substantial efforts are made for the humanization of workstations~\cite{Eche08}.
 
+For controlled environments there exist partial solutions for the automated commissioning
+problem. The system described in~\cite{Wurm08} coordinates a fleet of Autonomous Ground Vehicles
+(AGVs) which transport shelves filled with goods to a human worker who picks the corresponding objects
+to complete the order. Key obstacles for a fully automatized solution applicable in general
+warehouse settings are the safe autonomous vehicle navigation in industrial environments
+co-populated by humans, as well as the autonomous grasping/manipulation of unstructured goods at
+reasonable cycle times.
 
-\cite{Wurm08}(KIVA) 
-
-
-The proposed APPLE project addresses the following important sub-task chain which occurs during
-commissioning in prototypical warehouses: picking of goods from a storage location, subsequent
-placement on a standard EUR-pallet and transport of the filled pallet to a target location. The
-process has to be carried out in a manner which is safe for humans operating in the same
-environment.
+In this work, we present the Autonomous Picking \& Palletizing (APPLE) research platform (see
+Fig.~\ref{fig:robot}) which we developed to address the following important sub-task chain which
+occurs during commissioning in prototypical warehouses: autonomous picking of goods from a storage
+location, subsequent placement on a standard EUR half-pallet and transport of the filled pallet to a
+target location. Furthermore, this process has to be carried out in a manner which is safe for
+humans operating in the same environment.
 %
 \begin{figure}[t!]
 \begin{center}
@@ -37,6 +42,18 @@ environment.
 \vspace{-0.65cm}
 \end{center}
 \end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
 
 The key obstacle for many application scenarios is the autonomous grasping in uncertain real-world
 environments. Currently, despite of a large research effort, no commer- cially viable solution is
