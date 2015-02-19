@@ -1,82 +1,148 @@
 \section{Grasping \& Manipulation System}
 \label{sec:manip}
 %
-\hl{Introduce LBR iiwa + Velvet Fingers 2 Gripper setup}
+In this section we present an integrative approach for grasp representation and motion
+generation. The main idea is to provide a functional representation of grasps as intervals in task
+space, which allows redundancy in the gripper pose prior to executing the grasp. Subsequently, we
+leverage the obtained redundancy to generate reactive manipulator motions by formulating a
+representation of the corresponding tasks in the prioritized motion control framework proposed by
+Kanoun et al.~\cite{Kano11}.
 %
 \subsection{Related Work}
 \label{subsec:Grasping_related_work}
 %
- Current autonomous grasping systems~\cite{Bere07, Srin10, Krug14a}
-commonly employ sampling based planners~\cite{LaVa06} to generate online reach-to-grasp motion plans
-for offline planned grasps which are stored in a database. During the execution phase, such
-approaches necessitate many futile motion planning attempts which often incurs significant time
-delays mainly due to the frequent colli- sion checks which are necessary to avoid the robot coming
-in contact with itself or the environment.  For APPLE, we adopted a real-time reactive control
-approach for manipulator mo- tion generation which allows to exploit redundancy, opposed to the
-commonly used sense-plan-act architectures which constrain all manipulator DoF. The main idea is to
-formulate a hierarchical set of tasks~\cite{Sams91} such as “move end-effector on this plane” or
-“avoid joint limits” and to compute controls such that tasks of lower priorities are exe- cuted in
-the null-space of higher ranked tasks~\cite{Sici91, Sent10}.
+In current autonomous grasping systems~\cite{Bere07, Srin10, Krug14a}, grasp planning and
+manipulator motion planning are usually seen as independent sub-problems~\cite{Dian10}. A database
+storing object models together with sets of pre-computed grasps is used to find suitable gripper
+poses/configurations~\cite{Mill04, Gold11, Krug14a}. In the online stage, sampling based
+planners~\cite{LaVa06} attempt to generate valid trajectories for the pre-planned grasps, which are
+executed in a feasible-first manner~\cite{Bere07}. During the execution phase, such approaches
+necessitate many futile motion planning attempts, which often incurs significant time delays since
+sampling based planners suffer from the curse of dimensionality. Also, while being able to solve
+complicated planning problems if given enough time, these planners do not scale well to
+geometrically simple scenarios and they are ill suited to incorporate contact events with the
+environment which is a prerequisite for any grasping/manipulation application.
 
-The aim is to reduce the dependence on classical, sampling based motion planning and to move towards
-reactive feedback control to generate and execute complex motion behaviors of a robot.  Here, only
-high-level behavioral goals (e. g., “go to this region” or “stay above obstacle plane”) are
-specified in form of task functions~\cite{Sams91}. An intelligent control algorithm, which is based
-on embedded optimization of these task functions, then handles the details and synthesizes
-appropriate motions automatically in an online fashion. Opposed to classical sense-plan-act
-architectures, in this paradigm only task-relevant Degrees of Freedom (DoF) need to be constrained,
-which allows to exploit kinematic redundancies, e. g., for a manipulator to avoid unexpected
-obstacles. Regarding grasp planning, we follow the general tenet and will extract redundant
-representations in form of constrained pose intervals instead of discrete poses
+Using control to exploit manipulator redundancy has long been in the focus of research~\cite{Sici91,
+  Sent10}. In this line of thought, opposed to define a set of discrete grasp poses, Gienger et
+al.~\cite{Gien08a, Gien08b} learn a manifold of feasible grasps for an object and use an
+attractor-based control scheme to reach the corresponding volume in the task space. Another approach
+to address motion planning and motion control simultaneously, is to formulate a hierarchical stack
+of equality tasks which are represented as task functions~\cite{Sams91}. Lower-ranked tasks are then
+solved in the null-space of tasks with higher priority~\cite{Sici91, Sent10}. A major step forward
+in this direction was achieved by Kanoun et al.~\cite{Kano11}, who extended the approach to include
+inequality tasks which significantly increases the expressiveness of the method. Recent advancements
+include the extension to dynamic control~\cite{Saab13} and an efficient solution algorithm for the
+underlying optimization problem~\cite{Esca14}.
 %
-\subsection{Grasp Planning}
-\begin{figure*}[t!] 
+\subsection{The Grasp Interval}
+\label{subsec:grasp_interval}
+%
+Traditional data-driven grasp synthesis~\cite{Bohg14} relies on precise knowledge of the target
+object geometry and frictional properties. Since this information is often not available in
+practice, grasps planned in simulation and under these assumptions might fail. This holds especially
+true, when considering an underactuated grasping device as we do in the presented work. In this
+case, the joint configuration depends on the interaction with the environment and is difficult or
+impossible to determine at planning time. Instead, we represent grasps as predefined intervals
+associated with primitive object geometries as exemplary shown in Fig.~\ref{fig:grasp_interval} for
+cylindrical objects. These intervals bound the grasping device's position and orientation but do not
+fully constrain its pose. For simplicity we limit ourselves to the illustrated grasp interval
+defined for cylindrical shapes, corresponding intervals can be defined for other shape categories
+such as spheres and parallelepipeds. Opposed to the similarly defined task intervals
+in~\cite{Gien08a, Gien08b}, which are learned in simulation, we explicitly incorporate prior
+knowledge about robust grasp poses in our representation. In a concept originating from observations
+of human grasping behavior, it has been shown that the grasping device should be roughly aligned
+with the target object's principal components to achieve robust grasps~\cite{Bala12}. This property
+is achieved by the cone constraints for the exemplary case depicted in
+Fig.~\ref{fig:grasp_interval}.
+
+Currently, the parameters of the grasp intervals such as the distance range between gripper and
+object have to be evaluated experimentally for each primitive shape category. To ease this
+non-trivial requirement, in the presented work we rely on a gripper which offers a low pre-grasp
+pose sensitivity combined with a compliant and robust grasp execution routine as discussed in
+Section~\ref{subsec:grasp_execution}.
+%
+\begin{figure}[t!] 
    \centering
     %\def\svgwidth{200pt} 
     \input{figs/grasp_interval.pdf_tex} 
-   \caption{\textit{Grasp interval:} (Left) todo ... (Right) truncated grasp interval ...} 
+    \caption{\textit{Grasp interval:} The shaded cyan regions illustrate the grasp interval for a
+      cylindrical object. For a successful grasp, the palm frame origin $\mbm{o}$ needs to lie
+      inside the depicted cylindrical shell which is aligned with object axis $\mbm{a}$. The
+      cylinders height is limited by two planes (not depicted) which are normal to
+      $\mbm{a}$. Additionally, the gripper's vertical axis ($z$) is constrained to lie in a cone
+      whose axis $\hat{\mbm{a}}$ is parallel to the object axis $\mbm{a}$, and the gripper's
+      approach axis ($x$) has to lie inside a cone centered on the normal connecting axis $\mbm{a}$
+      and point $\mbm{o}$.}
    \label{fig:grasp_interval}
-\end{figure*}
-%\FloatBarrier
+   \vspace{-0.5cm}
+\end{figure}
 %
-
-\cite{Bohg14}(data driven grasping) (SotA autonomous grasping systems) \cite{Pas13} cylinder shell
-fitting
-
-The key challenge for many applications of robotic mobile manipulation is autonomous grasping in
-uncertain real-world environments. Finding collision-free trajec- tories leading the gripper-arm
-chain from a given initial to a reachable final state (grasp planning together with vehicle and
-manipulator motion planning) constitutes the fundament for any robot manipulation system. Currently,
-despite of a large research effort, no commercially viable solution is available for this
-problem. In today’s state-of-the-art autonomous grasping systems~\cite{Bere07, Srin10, Krug14a},
-grasp planning and motion planning are usually seen as independent sub-problems~\cite{Dian10}. A
-database storing object models together with pre-computed grasps is used to relax the need to find
-suitable gripper poses/configurations~\cite{Mill04, Gold11, Krug14a}. In the online stage, sampling
-based planners~\cite{LaVa06} attempt to generate valid trajectories for the pre-planned grasps,
-which are executed in a feasible-first manner~\cite{Bere07}. During the execution phase, such
-approaches necessitate many futile motion planning attempts, which often incurs significant time
-delays since sampling based planners suffer from the curse of dimensionality. Also, while being able
-to solve complicated planning problems if given enough time, these planners don’t scale well to
-geometrically simple scenarios~\cite{Ratl09} and they are ill suited to incorporate contact events
-with the environment.
-
- Instead of representing grasps as discrete gripper wrist poses and joint
-configurations, we use grasp interval regions as depicted in Fig.~\ref{fig:grasp_interval}. These
-grasp intervals can easily be transcribed as target tasks for the manipulator motion control and
-allow for redundancy in the manipulator wrist positioning which eases reach-to-grasp
-acquisition. Grasp interval formulation depends on the specific target object and has to be verified
-experimentally. For now, we constrain ourselves to cylindrical objects as shown in
-Fig.~\ref{fig:grasp_interval}. We then rely on the inherent capabilities of the grasping device and
-the compliance of the system for successful grasp execution as stated below.
-
-
-\cite{Bala12}(Identifying grasp principles from humans) \cite{Gien08a, Gien08b, Vahr10}(Task maps with RRT)
+\subsection{Object Detection and Grasp Planning}
+\label{subsec:obj_det}
+%
+\begin{figure}[t!] 
+   \centering
+    %\def\svgwidth{200pt} 
+    \input{figs/truncated_grasp_interval.pdf_tex} 
+    \caption{\textit{Truncated grasp interval:} todo...}
+   \label{fig:truncated_grasp_interval}
+\end{figure}
+%
+Typical commissioning scenarios in a warehouse environment would generally involve as a first step
+the identification and localization of an object targeted for picking.  There are however many
+application scenario specific factors to consider when designing an object detection system for this
+task.  For example: a single pallet may hold a homogeneous or a heterogeneous set of objects;
+objects may be stored in boxes and equipped with barcodes; objects may be stored on shelves,
+pallets, or simply piled up.  For the APPLE project we assumed a simple scenario where objects of
+the same type are stored on a single pallet.  We have equipped the Velvet Fingers 2 gripper with a
+structured light depth sensor: the Structure IO\footnote{\url{http://structure.io/}} device.  We use
+the 3D point clouds generated by the sensor as an input for a simple object detection module which
+identifies clusters of points matching our expected object models.  The object detection module was
+implemented using the point cloud library (PCL)\footnote{\url{http://pointclouds.org/}} following
+the simple algorithm described in Alg.~\ref{alg:obj}.
+%
+\begin{algorithm}[tbh]
+%\DontPrintSemicolon
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\Input{Pointcloud $P$, kinematic model $K$, joint positions $\mbm{j}$}
+\Output{Target cluster $T$}
+Transform $P$ into world coordinates using $K,\mbm{j}$\;
+\While {target plane not found} {
+    Extract plane $\mbm{n},d$ from $P$ using RANSAC\;
+    \If{$\mbm{n}\mbm{z} < \cos{\alpha}, abs(d-h_{pallet}) < e_{pallet}$}{target plane found\;}
+    \Else{ Remove inliers and iterate. If points in $P$ less than $20\%$ of original points, report failure\;}
+}
+Extract oriented bounding box (OBB) of plane inliers\;
+Extract points inside OBB and height in $(d,d+d_{eps})$\;
+Euclidean cluster points in $P_n$\;
+\For{each cluster $E_i$} {
+    Fit a ML Gaussian to $E_i$ as $\mu_i,\Sigma_i$\;
+    Eigen decomposition $\Sigma_i=Q\Lambda Q^{-1}$\;
+    Let $\mbm{q}_1$ be the eigenvector associated to the largest eigenvalue $\lambda_1$\;
+    \If{$\mbm{q}_1\mbm{z} < \cos{\alpha}$ and $\lambda_2 < r_{max}$} {report target cluster at $\mu_i,\Sigma_i$\;}
+}
+\caption{Object detection algorithm}\label{alg:obj}
+\end{algorithm}
+%
+\par
+The basic idea of Alg.~\ref{alg:obj} is to first detect the location of the pallet plane, then to
+extract the points belonging to objects on the pallet, cluster them and then analyze the obtained
+clusters. The parameters in this algorithm are: $h_{pallet}$ --- the expected height of the pallet
+above floor level; $e_{pallet}$ --- a tolerance of the pallet height; $\alpha$ --- a tolerance on
+the angle that the pallet plane normal makes with the vertical axis $\mbm{z}$; $r_{max}$ --- the
+maximum radius of a graspable cylinder. Each of the detected clusters is analyzed using PCA,
+checking that the dominant point distribution is along the $\mbm{z}$ axis and that the $x-y$ point
+spread is within the graspable objects limit. Identified target clusters are then passed on to the
+grasp planning module.
+%
+\hl{@Todor: should the cylinder shell fitting be cited here ...?}~\cite{Pas13}
 %
 \subsection{Manipulator Motion Generation}
 \label{subsec:manip_motion}
 %
- \cite{Sams91}(task functions)
-~\cite{Sici91, Sent10}(Redundant motion generation)
+
 
 We lean on the notation in~\cite{Esca14} and define the manipulator joint configuration by the
 vector $\mbm{q}$ and the control inputs as corresponding joint velocities $\dot{\mbm{q}}$. A task
@@ -142,8 +208,7 @@ of~\eqref{eq:HiQP}.
 For reactive on-the-fly motion generation we formulate a stack of hierarchical tasks and use the
 recently developed method by Kanoun et al.~\cite{Kano11}, which allows to account for inequality
 tasks and solves a sequence of convex optimization problems at each time step to obtain
-appropriate joint velocity commands (the method also can be used to directly generate torque
-commands while accounting for the robot dynamics~\cite{Saab13}).
+appropriate joint velocity commands.
  
 Obstacle avoidance is also achieved on a control-level, by formulating tasks which maintain minimum
 distances between simple geometric primitives such as spheres, planes, points and capsules. We argue
@@ -156,8 +221,8 @@ schemes and contact detection abilities an ideal platform for the tackled purpos
 generation scheme. The relatively simple picking task in APPLE provides an ideal testbed in a
 real-world scenario.
 
-\cite{Kano09}(Task function descriptions)
-%
+
+
 \subsection{Robust Grasp Execution}
 \label{subsec:grasp_execution}
 %

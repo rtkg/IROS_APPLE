@@ -36,7 +36,7 @@
   }%
   \providecommand\rotatebox[2]{#2}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{472.60410156bp}%
+    \setlength{\unitlength}{237.14287109bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -48,22 +48,13 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
- \begin{picture}(1,0.47277355)%
+  \begin{picture}(1,0.78265076)%
     \put(0,0){\includegraphics[width=\unitlength]{figs/grasp_interval.pdf}}%
-    \put(0.43882231,0.33724013){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$y$}}}%
-    \put(0.3159507,0.33946708){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$x$}}}%
-    \put(0.39950067,0.41712952){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$z$}}}%
-    \put(0.39408308,0.36695679){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$o$}}}%
-    \put(0.36021865,0.44596197){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\hat{\mathbf{a}}$}}}%
-    \put(0.21744701,0.26338505){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\mathbf{a}$}}}%
-    \put(0.93530643,0.4195988){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$z$}}}%
-    \put(0.97587175,0.33479321){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$y$}}}%
-    \put(0.85360465,0.34125196){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$x$}}}%
-    \put(0.92781284,0.36696799){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$o$}}}%
-    \put(0.76633076,0.25162412){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\varphi$}}}%
-    \put(0.90134483,0.19629276){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$c$}}}%
-    \put(0.90341262,0.15413614){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$h$}}}%
-    \put(0.14489583,0.24915856){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$r_1$}}}%
-    \put(0.17397595,0.29165772){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$r_2$}}}%
+    \put(0.87453283,0.51064302){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$y$}}}%
+    \put(0.62966091,0.51508113){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$x$}}}%
+    \put(0.79616838,0.66985529){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$z$}}}%
+    \put(0.78537162,0.56986563){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$o$}}}%
+    \put(0.7178829,0.72731575){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\hat{\mathbf{a}}$}}}%
+    \put(0.43335205,0.3634566){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\mathbf{a}$}}}%
   \end{picture}%
 \endgroup%
