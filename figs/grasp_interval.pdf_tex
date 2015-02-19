@@ -51,7 +51,7 @@
   \begin{picture}(1,0.78265076)%
     \put(0,0){\includegraphics[width=\unitlength]{figs/grasp_interval.pdf}}%
     \put(0.87453283,0.51064302){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$y$}}}%
-    \put(0.62966091,0.51508113){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$x$}}}%
+    \put(0.62966091,0.51508113){\color[rgb]{1,1,1}\makebox(0,0)[lb]{\smash{$x$}}}%
     \put(0.79616838,0.66985529){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$z$}}}%
     \put(0.78537162,0.56986563){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$o$}}}%
     \put(0.7178829,0.72731575){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\hat{\mathbf{a}}$}}}%
