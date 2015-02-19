@@ -21,7 +21,13 @@ Fig.~\ref{fig:robot}) which we developed to address the following important sub-
 occurs during commissioning in prototypical warehouses: autonomous picking of goods from a storage
 location, subsequent placement on a standard EUR half-pallet and transport of the filled pallet to a
 target location. Furthermore, this process has to be carried out in a manner which is safe for
-humans operating in the same environment.
+humans operating in the same environment. The platform's mobile base consists of a non-holonomic
+forklift AGV which is able to detect and pick up pallets in designated loading zones \hl{@Henrik: is
+  that a reasonable one-sentence description...?}. A KUKA LBR iiwa leight-weight arm which is fitted
+with an under-actuated gripper with conveyor belts on the inside of each finger is used for robust
+grasping and object manipulation. While this setup is not intended as a close-to-market solution for
+palletizing, the force/torque sensing capabilities as well as the compliant and human-safe control
+possibilities allow us to investigate various grasping/manipulation strategies.
 %
 \begin{figure}[t!]
 \begin{center}
@@ -43,39 +49,16 @@ humans operating in the same environment.
 \end{center}
 \end{figure}
 
+In this paper, we outline our solution to the safe navigation of the APPLE platform in an industrial
+scenario co-populated by human workers wearing reflective vests. Furthermore, we introduce a novel
+grasp planning- and representation scheme which is utilized for reactive, on-the-fly manipulator
+motion generation. This allows to exploit manipulator redundancies and offers several advantages to
+the commonly used sense-plan-act architectures. As a final contribution, we discuss our compliant
+grasp execution strategy which uses the active surfaces on the gripper to increase grasp robustness.
 
-
-
-
-
-
-
-
-
-
-
-
-The key obstacle for many application scenarios is the autonomous grasping in uncertain real-world
-environments. Currently, despite of a large research effort, no commer- cially viable solution is
-available for this problem. State of the art autonomous grasping systems~\cite{Bere07, Srin10,
-  Krug14a} commonly employ sampling based planners~\cite{LaVa06} to generate online reach-to-grasp
-motion plans for offline planned grasps which are stored in a database.  During the execution phase,
-such approaches necessitate many futile motion planning attempts which often incurs significant time
-delays mainly due to the frequent colli- sion checks which are necessary to avoid the robot coming
-in contact with itself or the environment.  For APPLE, we adopted a real-time reactive control
-approach for manipulator mo- tion generation which allows to exploit redundancy, opposed to the
-commonly used sense-plan-act architectures which constrain all manipulator DoF. The main idea is to
-formulate a hierarchical set of tasks~\cite{Sams91} such as “move end-effector on this plane” or
-“avoid joint limits” and to compute controls such that tasks of lower priorities are exe- cuted in
-the null-space of higher ranked tasks~\cite{Sici91, Sent10}.
-
-The aim is to reduce the dependence on classical, sampling based motion planning and to move towards
-reactive feedback control to generate and execute complex motion behaviors of a robot.  Here, only
-high-level behavioral goals (e. g., “go to this region” or “stay above obstacle plane”) are
-specified in form of task functions~\cite{Sams91}. An intelligent control algorithm, which is based
-on embedded optimization of these task functions, then handles the details and synthesizes
-appropriate motions automatically in an online fashion. Opposed to classical sense-plan-act
-architectures, in this paradigm only task-relevant Degrees of Freedom (DoF) need to be constrained,
-which allows to exploit kinematic redundancies, e. g., for a manipulator to avoid unexpected
-obstacles. Regarding grasp planning, we follow the general tenet and will extract redundant
-representations in form of constrained pose intervals instead of discrete poses
+The remainder of this article is organized as follows: below we outline the AGV navigation and
+motion planning scheme before presenting our solution for people detection in
+Section~\ref{subsec:AGV_related_work}. In Section~\ref{sec:manip} our approach to robust, online
+grasp motion generation and grasp execution is discussed. We show early results and an evaluation of
+the APPLE system by means on a simplified commissioning task in Section~\ref{sec:eval} before
+drawing conclusions in Section~\ref{sec:discussion}.

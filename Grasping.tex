@@ -1,10 +1,33 @@
-\section{Grasping and Manipulation}
+\section{Grasping \& Manipulation System}
 \label{sec:manip}
 %
 \hl{Introduce LBR iiwa + Velvet Fingers 2 Gripper setup}
 %
 \subsection{Related Work}
 \label{subsec:Grasping_related_work}
+%
+ Current autonomous grasping systems~\cite{Bere07, Srin10, Krug14a}
+commonly employ sampling based planners~\cite{LaVa06} to generate online reach-to-grasp motion plans
+for offline planned grasps which are stored in a database. During the execution phase, such
+approaches necessitate many futile motion planning attempts which often incurs significant time
+delays mainly due to the frequent colli- sion checks which are necessary to avoid the robot coming
+in contact with itself or the environment.  For APPLE, we adopted a real-time reactive control
+approach for manipulator mo- tion generation which allows to exploit redundancy, opposed to the
+commonly used sense-plan-act architectures which constrain all manipulator DoF. The main idea is to
+formulate a hierarchical set of tasks~\cite{Sams91} such as “move end-effector on this plane” or
+“avoid joint limits” and to compute controls such that tasks of lower priorities are exe- cuted in
+the null-space of higher ranked tasks~\cite{Sici91, Sent10}.
+
+The aim is to reduce the dependence on classical, sampling based motion planning and to move towards
+reactive feedback control to generate and execute complex motion behaviors of a robot.  Here, only
+high-level behavioral goals (e. g., “go to this region” or “stay above obstacle plane”) are
+specified in form of task functions~\cite{Sams91}. An intelligent control algorithm, which is based
+on embedded optimization of these task functions, then handles the details and synthesizes
+appropriate motions automatically in an online fashion. Opposed to classical sense-plan-act
+architectures, in this paradigm only task-relevant Degrees of Freedom (DoF) need to be constrained,
+which allows to exploit kinematic redundancies, e. g., for a manipulator to avoid unexpected
+obstacles. Regarding grasp planning, we follow the general tenet and will extract redundant
+representations in form of constrained pose intervals instead of discrete poses
 %
 \subsection{Grasp Planning}
 \begin{figure*}[t!] 
