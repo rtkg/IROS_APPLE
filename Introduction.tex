@@ -21,21 +21,22 @@ goods at reasonable cycle times.
 \includegraphics[width =0.85\linewidth]{figs/apple_demonstrator}
 %\vspace{-0.25cm}
 \caption{\textit{The APPLE platform:} A KUKA LBR iiwa arm (3) is mounted on a retrofitted Linde
-  CitiTruck AGV (6). For localization, a Velodyne Lidar\protect\footnotemark (4) is used, human
-  worker detection is carried out with the RefleX camera system (5). The depicted grasping device
-  (2) is a further developed and smaller version of the Velvet Fingers gripper described
-  in~\cite{Tinc12}. Each of the gripper’s two fingers has a planar manipulator structure with two
-  rotary joints and active surfaces which are implemented by conveyor belts on the inside of the two
-  phalanges. The mechanical structure of each finger is underactuated and comprises one actuated
-  Degree of Freedom (DoF) for opening and closing and two DoF for the belt movements. If, during
-  grasping, the proximal phalanges are blocked by an object, the gripper’s distal phalanges continue
-  to ``wrap around'' and envelope it in a firm grasp. Object and pallet detection is done with a
-  Structure IO device (1) which is mounted on the gripper's palm.}
+  CitiTruck AGV (7). For localization, a Velodyne HDL-32 Lidar (4) is used, human worker detection
+  is carried out with the RefleX camera system (6). In order to detect pallets, we employ a Asus
+  Xtion Pro Live structured light camera (5). The depicted grasping device (2) is a further
+  developed and smaller version of the Velvet Fingers gripper described in~\cite{Tinc12}. Each of
+  the gripper’s two fingers has a planar manipulator structure with two rotary joints and active
+  surfaces which are implemented by conveyor belts on the inside of the two phalanges. The
+  mechanical structure of each finger is underactuated and comprises one actuated Degree of Freedom
+  (DoF) for opening and closing and two DoF for the belt movements. If, during grasping, the
+  proximal phalanges are blocked by an object, the gripper’s distal phalanges continue to ``wrap
+  around'' and envelope it in a firm grasp. Object and pallet detection is done with a Structure IO
+  device (1) which is mounted on the gripper's palm.}
 \label{fig:robot}
 \vspace{-0.65cm}
 \end{center}
 \end{figure}
-\footnotetext{\url{http://www.velodynelidar.com/}}
+
 
 In this work, we present the Autonomous Picking \& Palletizing (APPLE) research platform (see
 Fig.~\ref{fig:robot}) which we developed to address the following important sub-task chain which
@@ -62,7 +63,7 @@ gripper to increase grasp robustness.
 
 The remainder of this article is organized as follows: below we outline the AGV navigation and
 motion planning scheme before presenting our solution for people detection in
-Section~\ref{subsec:AGV_related_work}. In Section~\ref{sec:manip} our approach to robust, online
-grasp motion generation and grasp execution is discussed. We show early results and an evaluation of
-the APPLE system by means on a simplified commissioning task in Section~\ref{sec:eval} before
-drawing conclusions in Section~\ref{sec:discussion}.
+Section~\ref{subsec:people_det}. In Section~\ref{sec:manip} our approach to robust, online grasp
+motion generation and grasp execution is discussed. We show early results and an evaluation of the
+APPLE system by means on a simplified commissioning task in Section~\ref{sec:eval} before drawing
+conclusions in Section~\ref{sec:discussion}.
