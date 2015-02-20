@@ -41,7 +41,7 @@ integrated on the APPLE demonstrator, a detailed description can be found in~\ci
 
 The localization utilize a Velodyne-32 3D laser scanner which is used to construct a 3D map (using the 3D-NDT-OM map representation) of the static parts of the environment~\cite{Stoy13}. The map and odometry information is used to localize the vehicle in the presence of dynamic entities using a dual timescale approach~\cite{Vale14}. 
 
-
+To obtain the pose of the pallet to pickup the current system requires a rough estimate of the location of the pallet. In order to compute a final estimate based on sensory data (Asus Xtion Pro Live) a signed distance function (SDF) tracker~\cite{Cane13} is used with a pre-defined SDF model of the pallet. The tracking is done while driving towards the provided initial pallet pose and the trajectory is recomputed on the fly, which depending on the pose offset may include a reverse operation. 
 
 \hl{Pallet detection?}
 
