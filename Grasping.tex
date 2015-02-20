@@ -78,7 +78,7 @@ Euclidean cluster points in $P_n$\;
 \par
 The basic idea of Algorithm~\ref{alg:obj} is to first detect the location of the pallet plane, then
 to extract the points belonging to objects on the pallet, cluster them and then analyze the obtained
-clusters. \hl{@Todor: is it worth putting a picture here...?} The parameters in this algorithm are:
+clusters. The parameters in this algorithm are:
 $h_{pallet}$ --- the expected height of the pallet above floor level; $e_{pallet}$ --- a tolerance
 of the pallet height; $\alpha$ --- a tolerance on the angle that the pallet plane normal makes with
 the vertical axis $\mbm{z}$; $r_{max}$ --- the maximum radius of a graspable cylinder. Each of the
@@ -142,12 +142,13 @@ Section~\ref{subsec:grasp_execution}.
 \end{figure}
 
 During the grasp procedure, after the target object pose is detected as the mean and covariance of
-the cluster obtained from Algorithm~\ref{alg:obj} \hl{(can one say it like that ...?)}, the grasp
+the cluster obtained from Algorithm~\ref{alg:obj}, the grasp
 interval needs to be adapted to the specific scene and target object dimensions as illustrated in
 Fig.~\ref{fig:truncated_grasp_interval}. For the evaluation presented in Section~\ref{sec:eval} we
 predefined the corresponding parameters and gripper pre-grasp joint configuration, an appropriate
-programmatic approach is left to future work. \hl{@Todor: could you add a sentence about your early
-  results about online grasp interval generation or should we maybe even present them here...?}
+programmatic approach is left to future work. 
+One promising strategy currently being explored is to pre-compute a gripper collision map and use it for determining the valid grasping configurations around the target object. 
+Once invalid grasping configurations have been pruned (by using the scene model), the remaining configurations can be clustered into continuous regions and used to determine the constraints in an automatic and collision-aware manner.
 %
 \subsection{Manipulator Motion Generation}
 \label{subsec:manip_motion}
@@ -265,32 +266,26 @@ manipulator.
 \end{figure*}
 %
 For this component, we leverage the capabilities of the Velvet Gripper, namely underactuation and
-conveyor belts on the finger pads in order to achieve robust grasping behavior. Especially in
-cluttered scenes, a ``pull-in'' strategy has been shown to be especially effective to achieve stable
-grasps while starting from a relatively wide range of initial gripper poses with respect to the
-target object~\cite{Krug14a}. Here, the features of the grasping device are exploited to embrace the
-object in a firm envelope grasp by simultaneously squeezing it in a compliant fashion while
-actuating the belts inwards.
-
-(\hl{the following is copy/pasted from the Gripper control workshop paper})~\cite{Krug14c} Each of
+conveyor belts on the finger pads in order to achieve robust grasping behavior. Each of
 the gripper’s two fingers has a planar manipulator structure with two joints and active surfaces
 which are implemented by coupled conveyor belts on the inside of the two phalanges. The mechanical
 structure is underactuated and comprises only one actuated Degree of Freedom (DoF) for opening and
 closing and two DoF for the belt movements.  If, during grasping, the proximal phalanges are blocked
-by an object, the gripper’s distal phalanges continue to “wrap around” and envelope it in a firm
+by an object, the gripper’s distal phalanges continue to ``wrap around'' and envelope it in a firm
 grasp.  The experiments reported in~\cite{Krug14a} showed, that in cluttered scenes fingertip
 grasps are more likely to be feasible than robust enveloping grasps, because the latter necessitate
 large opening angles resulting in bulky gripper silhouettes for which no collision free approach
-trajectories can be found. Therefore, we employ the “pull-in” strategy which is illustrated in
-Fig.~\ref{nothereyet}. Here, the underactuated nature and the conveyor belts on the grasping device
-are exploited to embrace the object in a firm envelope grasp by simultaneously squeezing it while
-actuating the belts inwards. This is achieved by compliant low-level position controllers which
-saturate on experimentally evaluated current thresholds. We use a simple grasping routine which is
-triggered after an initial fingertip grasp is achieved (see Fig.~\ref{nothereyet}). This routine
-consists of issuing commands to fully close the gripper while moving the belts a pre-defined offset
-towards the palm. Three thresholds on the current absorption of the opening motor are used: a low
-threshold (LT) signifies contact between the gripper and the object and a mid threshold (MT)
-indicates a large enough contact force to stop the closing movement.  Finally, an upper threshold
-(UT) prevents damage to the grasping device. Once the pull-in sequence is completed, the controllers
-maintain the final torques to ensure a stable grasp.
-
+trajectories can be found. Therefore, we employ the ``pull-in'' strategy which is illustrated in
+Fig.~\ref{fig:pull_in_control}. As demonstrated previously~\cite{Krug14a}, this strategy is especially effective in achieving stable
+grasps, starting from a relatively wide range of initial gripper poses with respect to the target object. 
+\par
+The grasping controller was implemented by means of low-level current controllers acting on the gripper open/close DoF and the actuated belts respectively.
+Current control of the motors emulates a force/torque controller, since the motor's current absorption increases with increasing effort on the output and thus with increasing grasping force.
+The pull-in strategy is implemented in three steps.
+First, a relatively low current is set to the open/close motor and the fingers start closing. 
+Once the fingers come into contact with the object and the target current is reached, the gripper blocks and there is no more motion.
+We detect this situation by monitoring the encoder on the open/close motor and enter the second phase of the grasping process: namely, we actuate the belts to pull in the target object.
+We then monitor the encoders on the belts and on the phalanges of the fingers. 
+If the belts block and the phalanges have wrapped around the object, we have achieved an enveloping grasp and enter the last stage of the process: we set a higher current to the motor in order to ensure a firm grasp. 
+The main parameters to this routine (the current thresholds for contact and final enveloping grasp) depend on the properties of the object --- namely the friction coefficient and weight.
+In this work, the parameters were experimentally tuned and good values were found for a set of common household objects.
