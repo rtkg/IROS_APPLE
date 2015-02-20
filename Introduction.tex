@@ -15,22 +15,6 @@ corresponding objects to complete the order. Key obstacles for a fully automatiz
 applicable in general warehouse settings are the safe autonomous vehicle navigation in industrial
 environments co-populated by humans, as well as the autonomous grasping/manipulation of unstructured
 goods at reasonable cycle times.
-
-In this work, we present the Autonomous Picking \& Palletizing (APPLE) research platform (see
-Fig.~\ref{fig:robot}) which we developed to address the following important sub-task chain which
-occurs during commissioning in prototypical warehouses: autonomous picking of goods from a storage
-location, subsequent placement on a standard EUR half-pallet and transport of the filled pallet to a
-target location. Furthermore, this process has to be carried out in a manner which is safe for
-humans operating in the same environment. The platform's mobile base consists of a non-holonomic
-Linde CitiTruck forklift AGV\footnote{\url{ http://www.citi-truck.com}} which is able to detect and
-pick up pallets in designated loading zones \hl{@Henrik: is that a reasonable one-sentence
-  description...?}. A KUKA LBR
-iiwa\footnote{\url{http://www.kuka-labs.com/en/service_robotics/lightweight_robotics/}}
-leight-weight arm which is fitted with an under-actuated gripper with conveyor belts on the inside
-of each finger is used for robust grasping and object manipulation. While this setup is not intended
-as a close-to-market solution for palletizing, the force/torque sensing capabilities as well as the
-compliant and human-safe control possibilities allow us to investigate various grasping/manipulation
-strategies.
 %
 \begin{figure}[t!]
 \begin{center}
@@ -53,12 +37,29 @@ strategies.
 \end{figure}
 \footnotetext{\url{http://www.velodynelidar.com/}}
 
-In this paper, we outline our solution to the safe navigation of the APPLE platform in an industrial
-scenario co-populated by human workers wearing reflective vests. Furthermore, we introduce a novel
-grasp planning- and representation scheme which is utilized for reactive, on-the-fly manipulator
-motion generation. This allows to exploit manipulator redundancies and offers several advantages to
-the commonly used sense-plan-act architectures. As a final contribution, we discuss our compliant
-grasp execution strategy which uses the active surfaces on the employed gripper to increase grasp robustness.
+In this work, we present the Autonomous Picking \& Palletizing (APPLE) research platform (see
+Fig.~\ref{fig:robot}) which we developed to address the following important sub-task chain which
+occurs during commissioning in prototypical warehouses: autonomous picking of goods from a storage
+location, subsequent placement on a standard EUR half-pallet and transport of the filled pallet to a
+target location. Furthermore, this process has to be carried out in a manner which is safe for
+humans operating in the same environment. The platform's mobile base consists of a non-holonomic
+Linde CitiTruck forklift AGV\footnote{\url{ http://www.citi-truck.com}} which is able to detect and
+pick up pallets in designated loading zones \hl{@Henrik: is that a reasonable one-sentence
+  description...?}. A KUKA LBR
+iiwa\footnote{\url{http://www.kuka-labs.com/en/service_robotics/lightweight_robotics/}}.
+leight-weight arm which is fitted with an under-actuated gripper with conveyor belts on the inside
+of each finger is used for robust grasping and object manipulation. While this setup is not intended
+as a close-to-market solution for palletizing, the force/torque sensing capabilities as well as the
+compliant and human-safe control possibilities allow us to investigate various grasping/manipulation
+strategies.
+
+  In this paper, we outline our solution to the safe navigation of the APPLE platform in
+an industrial scenario co-populated by human workers wearing reflective vests. Furthermore, we
+introduce a novel grasp planning- and representation scheme which is utilized for reactive,
+on-the-fly manipulator motion generation. This allows to exploit manipulator redundancies and offers
+several advantages to the commonly used sense-plan-act architectures. As a final contribution, we
+discuss our compliant grasp execution strategy which uses the active surfaces on the employed
+gripper to increase grasp robustness.
 
 The remainder of this article is organized as follows: below we outline the AGV navigation and
 motion planning scheme before presenting our solution for people detection in
