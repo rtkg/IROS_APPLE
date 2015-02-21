@@ -54,23 +54,18 @@ SDF model of the pallet. The tracking is done while driving towards the pickup z
 trajectory is recomputed on the fly which, depending on the pose offset, may include a reverse
 driving operation.
 %
-\subsection{People Detection}
+\subsection{Human Detection}
 \label{subsec:people_det}
-%
-As the envisioned mobile manipulation system will operate in environments shared with human workers,
-people detection and human safety are important issues. In APPLE we address the problem by using the
-RefleX system we recently developed~\cite{Mosb14}. RefleX is a camera-based on-board safety system
-for industrial vehicles and machinery for detection of human workers wearing reflective vests worn
-as per safety regulations (see Fig.~\ref{fig:people_det}). The system was designed with industrial
-safety standards in mind and is currently being tested as an industrial prototype.
 %
 \begin{figure}[t!]
   \begin{center}
     \includegraphics[width =1\linewidth]{figs/person_detection}
     % \vspace{-0.25cm}
-    \caption{\textit{People detection:} The developed RefleX camera system allows to detect workers
-      in different poses such as standing (Left) or sitting (Right).}
+    \caption{\textit{Human detection:} For safe navigation, the robot detects and tracks humans in the close neighborhood, estimates their position, and infers body pose information. Active infrared vision in combination with reflective safety clothing ensure robust performance independent of the illumination conditions.}
     \label{fig:people_det}
     \vspace{-0.5cm}
   \end{center}
 \end{figure}
+% 
+As the envisioned mobile manipulation system will operate in environments shared with human workforce,
+robust human detection is crucial to ensure a safe work environment. In APPLE we address this problem by using the recently developed RefleX workforce protection system~\cite{Mosb14}. RefleX is a camera-based safety system designed for industrial vehicles and machinery, that detects and tracks human workers wearing off-the-shelf high-visibility clothing (Fig.~\ref{fig:people_det}). Using active near-infrared stereo vision, RefleX detects and locates the reflective markers on the safety garments in order to estimate position and relative velocity of the observed person, and infer further body pose information. The underlying sensing principle thereby ensures that the detection performance is independent of external illumination conditions. A classification of the observed reflective patterns further allows APPLE to discriminate between the worker's safety garments and other reflective navigation markers placed in the environment.
