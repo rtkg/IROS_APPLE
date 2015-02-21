@@ -1,3 +1,4 @@
+
 \section{Grasping \& Manipulation System}
 \label{sec:manip}
 %
@@ -89,6 +90,21 @@ grasp planning module described below.
 \subsection{Grasp Representation and Planning}
 \label{subsec:grasp_planning}
 %
+\begin{figure}[t!] 
+   \centering
+    %\def\svgwidth{200pt} 
+    \input{figs/grasp_interval.pdf_tex} 
+    \caption{\textit{Grasp interval:} The shaded cyan regions illustrate the grasp interval for a
+      cylindrical object. For a successful grasp, the palm frame origin $\mbm{o}$ needs to lie
+      inside the depicted cylindrical shell which is aligned with object axis $\mbm{a}$. The
+      cylinders height is limited by two planes which are normal to $\mbm{a}$. Additionally, the
+      gripper's vertical axis ($z$) is constrained to lie in a cone whose axis $\hat{\mbm{a}}$ is
+      parallel to the object axis $\mbm{a}$, and the gripper's approach axis ($x$) has to lie inside
+      a cone centered on the normal connecting axis $\mbm{a}$ and point $\mbm{o}$.}
+   \label{fig:grasp_interval}
+   \vspace{-0.5cm}
+\end{figure}
+%
 Traditional data-driven grasp synthesis~\cite{Bohg14} relies on precise knowledge of the target
 object geometry and frictional properties. Since this information is often not available in
 practice, grasps planned in simulation and under these assumptions might fail. This holds especially
@@ -116,22 +132,6 @@ Section~\ref{subsec:grasp_execution}.
 \begin{figure}[t!] 
    \centering
     %\def\svgwidth{200pt} 
-    \input{figs/grasp_interval.pdf_tex} 
-    \caption{\textit{Grasp interval:} The shaded cyan regions illustrate the grasp interval for a
-      cylindrical object. For a successful grasp, the palm frame origin $\mbm{o}$ needs to lie
-      inside the depicted cylindrical shell which is aligned with object axis $\mbm{a}$. The
-      cylinders height is limited by two planes (not depicted) which are normal to
-      $\mbm{a}$. Additionally, the gripper's vertical axis ($z$) is constrained to lie in a cone
-      whose axis $\hat{\mbm{a}}$ is parallel to the object axis $\mbm{a}$, and the gripper's
-      approach axis ($x$) has to lie inside a cone centered on the normal connecting axis $\mbm{a}$
-      and point $\mbm{o}$.}
-   \label{fig:grasp_interval}
-   \vspace{-0.5cm}
-\end{figure}
-%
-\begin{figure}[t!] 
-   \centering
-    %\def\svgwidth{200pt} 
     \input{figs/truncated_grasp_interval.pdf_tex} 
     \caption{\textit{Truncated grasp interval:} During the online stage, the corresponding grasp
       interval shown in Fig.~\ref{fig:grasp_interval} needs to be truncated ($i.\,e.,$ parameters
@@ -139,6 +139,7 @@ Section~\ref{subsec:grasp_execution}.
       target object dimensions and to account for the fact that some regions of the grasp interval
       might not be feasible due to obstruction by the environment.}
    \label{fig:truncated_grasp_interval}
+   \vspace{-0.5cm}
 \end{figure}
 
 During the grasp procedure, after the target object pose is detected as the mean and covariance of
@@ -252,9 +253,9 @@ manipulator.
    \label{fig:pull_in}
    \centering
  \end{figure}
-%
-\begin{figure*}[!t]
- \centering
+ % 
+ \begin{figure*}[!t]
+   \centering
    \subfigure[]{\includegraphics[width = .32\linewidth]{figs/vcg1}}
    \subfigure[]{\includegraphics[width = .32\linewidth]{figs/vcg2}}
    \subfigure[]{\includegraphics[width = .32\linewidth]{figs/vcg3}}
@@ -264,8 +265,9 @@ manipulator.
      current in between two target thresholds by opening or closing the gripper during in-hand
      manipulation (Right).}
    \label{fig:pull_in_control}
- \centering
-\end{figure*}
+   \centering
+   \vspace{-0.5cm}
+ \end{figure*}
 %
 For this component, we leverage the capabilities of the Velvet Gripper, namely underactuation and
 conveyor belts on the finger pads in order to achieve robust grasping behavior. Each of
