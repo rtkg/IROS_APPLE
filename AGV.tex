@@ -59,13 +59,25 @@ driving operation.
 %
 \begin{figure}[t!]
   \begin{center}
-    \includegraphics[width =1\linewidth]{figs/person_detection}
+    \includegraphics[width =0.99\linewidth]{figs/person_detection}
     % \vspace{-0.25cm}
-    \caption{\textit{Human detection:} For safe navigation, the robot detects and tracks humans in the close neighborhood, estimates their position, and infers body pose information. Active infrared vision in combination with reflective safety clothing ensure robust performance independent of the illumination conditions.}
+    \caption{\textit{Human detection:} For safe navigation, the robot detects and tracks humans in
+      the close neighborhood, estimates their position, and infers body pose information. Active
+      infrared vision in combination with reflective safety clothing ensures robust performance
+      independent of the illumination conditions.}
     \label{fig:people_det}
-    \vspace{-0.5cm}
+    \vspace{-0.55cm}
   \end{center}
 \end{figure}
 % 
-As the envisioned mobile manipulation system will operate in environments shared with human workforce,
-robust human detection is crucial to ensure a safe work environment. In APPLE we address this problem by using the recently developed RefleX workforce protection system~\cite{Mosb14}. RefleX is a camera-based safety system designed for industrial vehicles and machinery, that detects and tracks human workers wearing off-the-shelf high-visibility clothing (Fig.~\ref{fig:people_det}). Using active near-infrared stereo vision, RefleX detects and locates the reflective markers on the safety garments in order to estimate position and relative velocity of the observed person, and infer further body pose information. The underlying sensing principle thereby ensures that the detection performance is independent of external illumination conditions. A classification of the observed reflective patterns further allows APPLE to discriminate between the worker's safety garments and other reflective navigation markers placed in the environment.
+As the envisioned mobile manipulation system will operate in environments shared with human
+workforce, robust human detection is crucial to ensure a safe work environment. We address this
+problem by using the recently developed RefleX workforce protection system~\cite{Mosb14}. RefleX is
+a camera-based safety system designed for industrial vehicles and machinery, that detects and tracks
+human workers wearing off-the-shelf high-visibility clothing (Fig.~\ref{fig:people_det}). Using
+active near-infrared stereo vision, RefleX detects and locates the reflective markers on the safety
+garments in order to estimate position and relative velocity of the observed person, and infer
+further body pose information. The underlying sensing principle thereby ensures that the detection
+performance is independent of external illumination conditions. A classification of the observed
+reflective patterns further allows the APPLE system to discriminate between a worker's safety
+garments and other reflective navigation markers placed in the environment.
