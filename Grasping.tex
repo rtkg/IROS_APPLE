@@ -210,7 +210,7 @@ in~\eqref{eq:QP} can be found by introducing the slack variable $\mbm{w}$ in the
 %
 \begin{align}\label{eq:iQP}
   &\underset{\dot{\mbm{q}},\;\mbm{w}}{\mbox{min}}\;\;||\mbm{w}||\\
-   \mbox{subject to} \quad &\mbm{J}\dot{\mbm{q}} \geq \mbm{e}^* + \mbm{w}. \nonumber
+   \mbox{subject to} \quad &\mbm{J}\dot{\mbm{q}} \leq \mbm{e}^* + \mbm{w}. \nonumber
 \end{align}
 %
 To form a hierarchical SoT with $p=1,\dots,P$ priority levels, we stack all task jacobians
