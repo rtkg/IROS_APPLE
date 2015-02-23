@@ -205,7 +205,7 @@ reformulating the task respectively as
   \mbm{J} \end{bmatrix}\dot{\mbm{q}} \leq \begin{bmatrix} -\dot{\mbm{e}}^* \\
   \dot{\mbm{e}}^* \end{bmatrix}$.
 
-If the constraint in~\eqref{eq:task} is infeasible, a least squares solution for $\mbm{q}^*$ as
+If the constraint in~\eqref{eq:task} is infeasible, a least squares solution for $\dot{\mbm{q}}^*$ as
 in~\eqref{eq:QP} can be found by introducing the slack variable $\mbm{w}$ in the decision variables
 %
 \begin{align}\label{eq:iQP}
@@ -233,7 +233,7 @@ of~\eqref{eq:HiQP}. Opposed to sampling based planners, the chosen control schem
 incorporate qualitative requirements ($e.\,g.$, the desired gripper alignment) during motion
 generation and allows for redundancy exploitation via appropriate task function formulations.
 
-Manipulator obstacle avoidance is also achieved on a control-level, by formulating tasks which
+Manipulator obstacle avoidance is also achieved on a control level, by formulating tasks which
 maintain minimum distances between simple geometric primitives such as spheres, planes, points and
 capsules. We argue that for the considered application strict collision avoidance is neither
 necessary nor desired, since picking and manipulation inherently necessitates contact events between
