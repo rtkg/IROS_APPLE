@@ -111,22 +111,22 @@ on to the grasp planning module described below.
 %
 Traditional data-driven grasp synthesis~\cite{Bohg14} relies on precise knowledge of the target
 object geometry and frictional properties. Since this information is often not available in
-practice, grasps planned in simulation and under these assumptions might fail. This holds especially
-true, when considering an underactuated grasping device as we do in the presented work. In this
-case, the gripper's joint configuration depends on the interaction with the environment and is
-difficult or impossible to determine at planning time. Instead, we represent grasps as predefined
-pose intervals associated with primitive object geometries as exemplary shown in
-Fig.~\ref{fig:grasp_interval} for side grasps on cylindrical objects. Note that an analogue interval
-can also be formed to enable top grasps. These intervals bound the grasping device's position and
-orientation, but do not fully constrain its pose. In this work, for simplicity, we limit ourselves
-to the illustrated grasp interval defined for cylindrical shapes. Corresponding intervals can be
-defined for other shape categories such as spheres and parallelepipeds as well. Opposed to the
-similarly defined task intervals in~\cite{Gien08a, Gien08b} which are learned in simulation, we
-deliberately design grasp intervals to incorporate prior knowledge about robust grasp poses in our
-representation. In a concept originating from observations of human grasping behavior, it has been
-shown that the grasping device should be roughly aligned with the target object's principal
-components to achieve robust grasps~\cite{Bala12}. This property is achieved by the cone constraints
-for the case depicted in Fig.~\ref{fig:grasp_interval}.
+practice, grasps planned in simulation might fail. This holds especially true, when considering an
+underactuated grasping device as we do in the presented work. In this case, the gripper's joint
+configuration depends on the interaction with the environment and is difficult or impossible to
+determine at planning time. Instead, we represent grasps as pre-defined pose intervals associated
+with primitive object geometries as exemplary shown in Fig.~\ref{fig:grasp_interval} for side grasps
+on cylindrical objects. Note that an analogue interval can also be formed to enable top
+grasps. These intervals bound the grasping device's position and orientation, but do not fully
+constrain its pose. In this work, for simplicity, we limit ourselves to the illustrated grasp
+interval defined for cylindrical shapes. Corresponding intervals can be defined for other shape
+categories such as spheres and parallelepipeds as well. Opposed to the similarly defined task
+intervals in~\cite{Gien08a, Gien08b} which are learned in simulation, we deliberately design grasp
+intervals to incorporate prior knowledge about robust grasp poses in our representation. In a
+concept originating from observations of human grasping behavior, it has been shown that the
+grasping device should be roughly aligned with the target object's principal components to achieve
+robust grasps~\cite{Bala12}. This property is achieved by the cone constraints for the case depicted
+in Fig.~\ref{fig:grasp_interval}.
 
 Currently, the parameters of the grasp intervals such as the distance range between gripper and
 object have to be evaluated experimentally for each primitive shape category. To ease this
@@ -150,7 +150,7 @@ Section~\ref{subsec:grasp_execution}.
 During operation, after the target object pose is detected as the mean and covariance of the cluster
 obtained from Algorithm~\ref{alg:obj}, the grasp interval needs to be adapted to the specific scene
 and target object dimensions as illustrated in Fig.~\ref{fig:truncated_grasp_interval}. For the
-evaluation presented in Section~\ref{sec:eval} we predefined the corresponding parameters and
+evaluation presented in Section~\ref{sec:eval} we pre-defined the corresponding parameters and
 gripper pre-grasp joint configuration, an appropriate programmatic approach is left to future work.
 One promising strategy currently being explored is to pre-compute a gripper collision map and use it
 for determining the valid grasping configurations around the target object. Once invalid grasping
@@ -173,7 +173,7 @@ discussion the reader is referred to the original work presented in~\cite{Kano11
 
 We lean on the notation in~\cite{Esca14} and define the manipulator joint configuration by the
 vector $\mbm{q}$ and the control inputs as corresponding joint velocities $\dot{\mbm{q}}$. A task
-function is any derivable function of $\mbm{e}$. To give an example, a task with the purpose of
+function is any derivable function of $\mbm{q}$. To give an example, a task with the purpose of
 bringing an end-effector point $\mbm{p}(\mbm{q})$ onto a plane described by unit normal $\mbm{n}$
 and offset $d$ can be transcribed by the task function $\mbm{e}=\mbm{n}^T\mbm{p}(\mbm{q})-d$, which
 formulates the projection residual between the plane and $\mbm{p}(\mbm{q})$. The task evolution is
@@ -239,8 +239,8 @@ capsules. We argue that for the considered application strict collision avoidanc
 necessary nor desired, since picking and manipulation inherently necessitates contact events between
 the robot and the environment. Also, in real-world applications where knowledge about the
 environment is available only in form of noisy sensor data, it might not be possible to avoid
-contacting the environment without being overly conservative. To this end, the APPLE platform relies
-on the compliant low-level control schemes and contact detection abilities of the employed
+contact with the environment without being overly conservative. To this end, the APPLE platform
+relies on the compliant low-level control schemes and contact detection abilities of the employed
 manipulator.
 %
 \subsection{Robust Grasp Execution}
