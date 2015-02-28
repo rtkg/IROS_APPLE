@@ -150,13 +150,12 @@ Section~\ref{subsec:grasp_execution}.
 During operation, after the target object pose is detected as the mean and covariance of the cluster
 obtained from Algorithm~\ref{alg:obj}, the grasp interval needs to be adapted to the specific scene
 and target object dimensions as illustrated in Fig.~\ref{fig:truncated_grasp_interval}. For the
-evaluation presented in Section~\ref{sec:eval} we pre-defined the corresponding parameters and
+evaluation presented in Section~\ref{sec:eval}, we pre-defined the corresponding parameters and
 gripper pre-grasp joint configuration, an appropriate programmatic approach is left to future work.
 One promising strategy currently being explored is to pre-compute a gripper collision map and use it
 for determining the valid grasping configurations around the target object. Once invalid grasping
 configurations have been pruned by using the scene model, the remaining configurations can be
-clustered into continuous regions and used to determine the constraints in an automatic and
-collision-aware manner.
+clustered into continuous regions and used to determine the constraints in an automatic manner.
 %
 \subsection{Manipulator Motion Generation}
 \label{subsec:manip_motion}
@@ -229,9 +228,13 @@ are frozen between iterations, needs to be solved for $p=1,\ldots,P$
 \end{align}
 %
 The final control vector $\dot{\mbm{q}}^*$ is then obtained from the $P^{\mbox{th}}$ solution
-of~\eqref{eq:HiQP}. Opposed to sampling based planners, the chosen control scheme allows to
-incorporate qualitative requirements ($e.\,g.$, the desired gripper alignment) during motion
-generation and allows for redundancy exploitation via appropriate task function formulations.
+of~\eqref{eq:HiQP}. Essentially, a sequence of instantaneous optimal control problems is solved at
+each time-step. The method is local, in the sense that it does not take the future state evolution
+into account~\cite{DelP14}. For the targeted relatively simple autonomous pick and place operations
+however, we found the performance satisfactory as demonstrated in Section~\ref{sec:eval}. Opposed to
+sampling based planners, the chosen control scheme can easily incorporate qualitative requirements
+($e.\,g.$, the desired gripper alignment) during motion generation and allows for redundancy
+exploitation via appropriate task function formulations.
 
 Manipulator obstacle avoidance is also achieved on a control level, by formulating tasks which
 maintain minimum distances between simple geometric primitives such as spheres, planes, points and
@@ -248,7 +251,7 @@ manipulator.
 %
 \begin{figure}[!t]
  \centering
-   \includegraphics[width = 1.0\linewidth]{figs/pull_in}
+   \includegraphics[width = 1\linewidth]{figs/pull_in}
    \caption{\textit{Pull-in grasping strategy:} Depicted is a sequence of intermediate grasp states
      where the belts of the gripper are used to pull the object towards its palm which results in a
      transition from a fingertip to an enveloping grasp.}
@@ -266,7 +269,7 @@ manipulator.
      setpoint to enable compliant in-hand manipulation behavior;}
    \label{fig:pull_in_control}
    \centering
-   \vspace{-0.5cm}
+   \vspace{-0.62cm}
  \end{figure*}
 %
  For this component, we exploit the capabilities of the utilized gripper~\cite{Tinc12}, namely
@@ -298,5 +301,5 @@ the phalange joints. If the belts block and the phalanges have wrapped around th
 enveloping grasp is achieved and we transition to the final stage. Here, a higher current setpoint
 is given to the open/close motor controller to ensure a firm grasp. The main parameters to this
 routine (the current thresholds for contact and final enveloping grasp) depend on the target object
-properties -- namely friction coefficient and mass. In this work, the parameters were
-experimentally tuned and good values were found for a set of common household objects.
+properties -- namely friction coefficient and mass. Here, the parameters were experimentally tuned
+and good values were found for a set of household objects.
