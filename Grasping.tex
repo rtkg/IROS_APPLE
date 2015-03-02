@@ -2,12 +2,12 @@
 \section{Grasping \& Manipulation System}
 \label{sec:manip}
 %
-In this section we present an integrative approach for grasp representation/planning and motion
-generation. The main idea is to provide a functional representation of grasps as intervals in task
-space, which allows redundancy in the gripper pose prior to executing the grasp. Subsequently, we
-leverage the obtained redundancy to generate reactive manipulator motions by formulating a
-representation of the corresponding tasks as a hierarchical Stack of Tasks (SoT) which is executed
-by the prioritized motion control framework proposed by Kanoun et al.~\cite{Kano11}.
+In this section we present an integrative approach for grasp representation/planning and manipulator
+motion generation. The main idea is to provide a functional representation of grasps as intervals in
+task space, which allows redundancy in the gripper pose prior to executing the grasp. Subsequently,
+we leverage the obtained redundancy to generate reactive motions by formulating a representation of
+the corresponding tasks as a hierarchical Stack of Tasks (SoT) which is executed by the prioritized
+motion control framework proposed by Kanoun et al.~\cite{Kano11}.
 %
 \subsection{Challenges in Autonomous Grasping}
 \label{subsec:Grasping_challenges}
@@ -60,9 +60,8 @@ $\{\mathcal{E}\} \leftarrow$ euclidean cluster points in $\mathcal{B}$\;
     Fit a ML Gaussian to $\mathcal{E}_i$ as $\mbm{\mu}_i,\mbm{\Sigma}_i$\;
     Eigen decomposition $\mbm{\Sigma_i}=\mbm{Q}\mbm{\Lambda}\mbm{Q}^{-1}$\;
     $\mbm{v}_1 \leftarrow$ eigenvector associated to the largest eigenvalue $\lambda_1$\;
-    \If{$(\mbm{v}_1^T\mbm{e}_z < \cos{\epsilon_{\alpha}}) \wedge (\lambda_2 < r_{max})$} {append cluster
-      $\mathcal{E}_i$ to the solution set $\{\mathcal{T}\}
-      \leftarrow \mathcal{E}_i$\;}
+    \If{$(\mbm{v}_1^T\mbm{e}_z < \cos{\epsilon_{\alpha}}) \wedge (\lambda_2 < r_{max})$} { $\{\mathcal{T}\}
+      \leftarrow \mathcal{E}_i$ append cluster $\mathcal{E}_i$ to the solution set\;}
 }
 \caption{Object detection algorithm}\label{alg:obj}
 \end{algorithm}
@@ -82,13 +81,13 @@ summarized in Algorithm~\ref{alg:obj}.
 
 The basic idea of Algorithm~\ref{alg:obj} is to first detect the location of the pallet plane, then
 to extract the points belonging to objects on the pallet, cluster them and subsequently analyze the
-obtained clusters. The parameters in this algorithm are the expected height $h_p$ of the
-pallet above floor level, a tolerance $\epsilon_p$ on the pallet height, a tolerance
-$\epsilon_{\alpha}$ on the angle that the pallet plane normal makes with the vertical axis $\mbm{z}$
-and the maximum radius $r_{max}$ of a graspable cylinder. Each of the detected clusters is analyzed
-using PCA, checking that the dominant point distribution is along the $\mbm{z}$ axis and that the
-$x/y$ point spread is within the graspable objects limit. Identified target clusters are then passed
-on to the grasp planning module described below.
+obtained clusters. The parameters in this algorithm are the expected height $h_p$ of the pallet
+above floor level, a tolerance $\epsilon_p$ on the pallet height, a tolerance $\epsilon_{\alpha}$ on
+the angle that the pallet plane normal makes with the vertical axis ($z$) and the maximum radius
+$r_{max}$ of a graspable cylinder. Each of the detected clusters is analyzed using PCA, checking
+that the dominant point distribution is along the $z$-axis and that the $x/y$ point spread is within
+the graspable objects limit. Identified target clusters are then passed on to the grasp planning
+module described below.
 %
 \subsection{Grasp Representation and Planning}
 \label{subsec:grasp_planning}
@@ -172,12 +171,12 @@ discussion the reader is referred to the original work presented in~\cite{Kano11
 
 We lean on the notation in~\cite{Esca14} and define the manipulator joint configuration by the
 vector $\mbm{q}$ and the control inputs as corresponding joint velocities $\dot{\mbm{q}}$. A task
-function is any derivable function of $\mbm{q}$. To give an example, a task with the purpose of
-bringing an end-effector point $\mbm{p}(\mbm{q})$ onto a plane described by unit normal $\mbm{n}$
-and offset $d$ can be transcribed by the task function $\mbm{e}=\mbm{n}^T\mbm{p}(\mbm{q})-d$, which
-formulates the projection residual between the plane and $\mbm{p}(\mbm{q})$. The task evolution is
-given by $\mbm{J}\dot{\mbm{q}}=\dot{\mbm{e}}$ with task jacobian
-$\mbm{J}=\frac{\partial\mbm{e}}{\partial\mbm{q}}$.
+function $\mbm{e}(\mbm{q})$ is any derivable function of $\mbm{q}$. To give an example, a task with
+the purpose of bringing an end-effector point $\mbm{p}(\mbm{q})$ onto a plane described by unit
+normal $\mbm{n}$ and offset $d$ can be transcribed by the task function
+$\mbm{e}(\mbm{q})=\mbm{n}^T\mbm{p}(\mbm{q})-d$, which formulates the projection residual between the
+plane and $\mbm{p}(\mbm{q})$. The task evolution is given by $\mbm{J}\dot{\mbm{q}}=\dot{\mbm{e}}$
+with task jacobian $\mbm{J}=\frac{\partial\mbm{e}}{\partial\mbm{q}}$.
 
 The goal is to compute joint velocities such that the task evolution follows a desired reference
 profile $\dot{\mbm{e}}^*$ (in this work chosen as exponential decay $\dot{\mbm{e}}^*= -\lambda
@@ -216,7 +215,7 @@ To form a hierarchical SoT with $p=1,\dots,P$ priority levels, we stack all task
 in~\eqref{eq:task} with the same assigned priority in a matrix $\mbm{A}_p$, and all corresponding
 reference velocities in a vector $\mbm{b}_p$ to form one constraint of the form
 $\mbm{A}_p\dot{\mbm{q}}\leq \mbm{b}_p$ for each hierarchy level. The aim is to sequentially satisfy
-a constraint at best in the least square sense while solving for the subsequent constraint of lower
+a constraint at best in the least square sense while solving for the subsequent constraints of lower
 priority in the null-space of the previous constraint, such that the previous solution is left
 unchanged. Therefore, the following QP, where the previous slack variable solutions $\mbm{w}_i^*$
 are frozen between iterations, needs to be solved for $p=1,\ldots,P$
@@ -253,7 +252,7 @@ manipulator.
  \centering
    \includegraphics[width = 1\linewidth]{figs/pull_in}
    \caption{\textit{Pull-in grasping strategy:} Depicted is a sequence of intermediate grasp states
-     where the belts of the gripper are used to pull the object towards its palm which results in a
+     where the belts of the gripper are used to pull the object towards the palm which results in a
      transition from a fingertip to an enveloping grasp.}
    \vspace{-4mm}
    \label{fig:pull_in}
@@ -266,7 +265,7 @@ manipulator.
    \caption{\textit{Grasp Execution Control:} (Left) as the gripper starts closing, the current
      through the opening motor is monitored; (Middle) when contact is made, the actuated belts are
      switched on to pull in the object; (Right) the controller strives to maintain a given current
-     setpoint to enable compliant in-hand manipulation behavior;}
+     setpoint in order to enable compliant in-hand manipulation behavior;}
    \label{fig:pull_in_control}
    \centering
    \vspace{-0.62cm}
@@ -279,7 +278,7 @@ manipulator.
  phalanges. The mechanical structure is underactuated and comprises only one actuated Degree of
  Freedom (DoF) for opening and closing and two DoF per finger for the belt movements. If, during
  grasping, the proximal phalanges are blocked by an object, the gripper’s distal phalanges continue
- to ``wrap around'' and envelope it in a firm grasp. The experiments reported in~\cite{Krug14a}
+ to ``wrap around'' and envelope it in a firm grasp. The experiments we reported in~\cite{Krug14a}
  showed, that in cluttered scenes fingertip grasps are more likely to be feasible than robust
  enveloping grasps, because the latter necessitate large opening angles resulting in bulky gripper
  silhouettes for which there might no collision free approach trajectory exist. Therefore, we employ

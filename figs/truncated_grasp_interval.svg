@@ -1116,6 +1116,17 @@
          id="rect4123-7-1-2-8-9"
          style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
     </clipPath>
+    <clipPath
+       id="clipPath4121-7-4-4-2"
+       clipPathUnits="userSpaceOnUse">
+      <rect
+         y="-22.746025"
+         x="110.32609"
+         height="312.85715"
+         width="296.42859"
+         id="rect4123-7-1-2-3"
+         style="fill:none;stroke:#000000;stroke-width:0.5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    </clipPath>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -1124,9 +1135,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="5.5999999"
-     inkscape:cx="205.44894"
-     inkscape:cy="142.06533"
+     inkscape:zoom="7.9195958"
+     inkscape:cx="148.4516"
+     inkscape:cy="177.10398"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -1332,7 +1343,7 @@
        id="text4342-1-22-3"
        sodipodi:linespacing="125%"
        clip-path="url(#clipPath4121-7-4-4)"
-       transform="matrix(0.16095922,0,0,0.16095922,-1858.8598,-1305.0047)"><tspan
+       transform="matrix(0.16095922,0,0,0.16095922,-1852.0154,-1290.6204)"><tspan
          sodipodi:role="line"
          id="tspan4344-2-4-3"
          x="369.56262"
@@ -1363,5 +1374,42 @@
          id="tspan4344-2-4-3-8-9"
          x="369.56262"
          y="138.74193">$c$</tspan></text>
+    <path
+       transform="matrix(0.93937341,0.23661433,-0.30522093,0.72822407,-1930.7589,-1428.1251)"
+       style="fill:none;stroke:#000000;stroke-width:0.2;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0"
+       d="m 126.35178,139.73775 c 0.51407,-0.48833 1.07254,-0.96241 1.67264,-1.42079 0.60009,-0.45838 1.2418,-0.90105 1.92232,-1.32659 0.68053,-0.42553 1.39987,-0.83392 2.15524,-1.22372 0.75536,-0.3898 1.54675,-0.76101 2.37136,-1.11219 0.82461,-0.35118 1.68244,-0.68233 2.57069,-0.99201 0.88826,-0.30967 1.80694,-0.59787 2.75325,-0.86315 0.94631,-0.26528 1.92024,-0.50764 2.91901,-0.72564 0.99877,-0.218 2.02236,-0.41163 3.06799,-0.57946 1.04563,-0.16783 2.11329,-0.30986 3.20019,-0.42463 1.08689,-0.11478 2.19303,-0.2023 3.3156,-0.26113 1.12257,-0.0588 2.26157,-0.089 3.41422,-0.089 2.3053,0 4.55603,0.12055 6.72983,0.3501 2.17379,0.22954 4.27065,0.56809 6.26818,1.00409 1.99753,0.43599 3.89575,0.96944 5.67226,1.58879 1.77651,0.61935 3.43132,1.3246 4.94205,2.1042 1.51073,0.7796 2.87738,1.63355 4.07756,2.55031 1.20019,0.91675 2.23392,1.89631 3.0788,2.92712 0.84489,1.03082 1.39901,1.79921 1.84384,2.92098"
+       id="path3211"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="csssssssssssssssssc" />
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:none"
+       d="m -1854.8057,-1296.4719 3.9044,-0.2185 -0.533,-1.7401"
+       id="path4881-2-6"
+       inkscape:connector-curvature="0" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1;stroke:none"
+       id="path4036"
+       sodipodi:cx="181.13298"
+       sodipodi:cy="156.23515"
+       sodipodi:rx="3.5986686"
+       sodipodi:ry="3.5986686"
+       d="m 184.73165,156.23515 a 3.5986686,3.5986686 0 1 1 0,-0.005 l -3.59867,0.005 z"
+       transform="matrix(0.12785422,0,0,0.12785422,-1821.1236,-1298.5622)"
+       sodipodi:start="0"
+       sodipodi:end="6.2817797" />
+    <text
+       xml:space="preserve"
+       style="font-size:8px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="369.56262"
+       y="138.74193"
+       id="text4342-1-22-3-9"
+       sodipodi:linespacing="125%"
+       clip-path="url(#clipPath4121-7-4-4-2)"
+       transform="matrix(0.16095922,0,0,0.16095922,-1883.9479,-1308.3741)"><tspan
+         sodipodi:role="line"
+         id="tspan4344-2-4-3-7"
+         x="369.56262"
+         y="138.74193">$\varphi$</tspan></text>
   </g>
 </svg>

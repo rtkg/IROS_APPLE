@@ -51,12 +51,13 @@
   \begin{picture}(1,1.00418396)%
     \put(0,0){\includegraphics[width=\unitlength]{figs/truncated_grasp_interval.pdf}}%
     \put(0.95036337,0.75189365){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$y$}}}%
-    \put(0.68892286,0.74244017){\color[rgb]{1,1,1}\makebox(0,0)[lb]{\smash{$x$}}}%
+    \put(0.68892286,0.74244017){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$x$}}}%
     \put(0.83007838,0.95038792){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$z$}}}%
     \put(0.81047323,0.80575793){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$o$}}}%
     \put(0.38755204,0.60761965){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$r_2$}}}%
-    \put(0.59394404,0.51063165){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$r_1$}}}%
+    \put(0.6167587,0.46268398){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$r_1$}}}%
     \put(0.83234304,0.34642832){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$h$}}}%
     \put(0.82881837,0.44231632){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$c$}}}%
+    \put(0.51031704,0.52186298){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\varphi$}}}%
   \end{picture}%
 \endgroup%

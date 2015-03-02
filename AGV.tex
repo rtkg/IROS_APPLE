@@ -38,9 +38,9 @@ The online trajectory generation is done in two steps. First, a kinematically fe
 discretized start and goal poses is generated using a lattice planner~\cite{Ciri14}. Second, this
 path is post-processed using a path smoother~\cite{Andr15} which assures a smooth, collision-free
 and continuous trajectory, which allows to drive the vehicle with high accuracy. Subsequently, the
-obtained trajectory is driven using a model predictive controller. For localization, a Velodyne
-HDL-32 3D laser scanner\footnote{\url{http://www.velodynelidar.com/}} is utilized to construct a 3D
-map (using the 3D-NDT-OM map representation) of the static parts of the
+obtained trajectory is driven using a model predictive tracking controller. For localization, a
+Velodyne HDL-32 3D laser scanner\footnote{\url{http://www.velodynelidar.com/}} is utilized to
+construct a 3D map (using the 3D-NDT-OM map representation) of the static parts of the
 environment~\cite{Stoy13}. The map and odometry information is then used to localize the vehicle in
 the presence of dynamic entities using a dual timescale approach~\cite{Vale14}. The complete
 navigation system has been implemented, extensively tested and successfully integrated on the APPLE
@@ -49,10 +49,10 @@ demonstrator. A detailed description can be found in~\cite{Andr15}.
 The current system for pallet detection and pickup requires a rough estimate of the location of the
 pallet ($i.\,e.,$ a pre-defined pickup zone). In order to compute the final pose based on sensory
 data from an Asus Xtion Pro Live\footnote{\url{http://www.asus.com/Multimedia/Xtion_PRO_LIVE/}}
-mounted on the AGV, a Signed Distance Function (SDF) tracker~\cite{Cane13} is used with a pre-defined
-SDF model of the pallet. The tracking is done while driving towards the pickup zone and the
-trajectory is recomputed on the fly which, depending on the pose offset, may include a reverse
-driving operation.
+mounted on the AGV, a Signed Distance Function (SDF) tracker~\cite{Cane13} is used with a given SDF
+model of the pallet. The tracking is done while driving towards the pickup zone and the trajectory
+is recomputed on the fly which, depending on the pose offset, may include a reverse driving
+operation.
 %
 \subsection{Human Detection}
 \label{subsec:people_det}
@@ -76,7 +76,7 @@ problem by using the recently developed RefleX workforce protection system~\cite
 a camera-based safety system designed for industrial vehicles and machinery, that detects and tracks
 human workers wearing off-the-shelf high-visibility clothing (Fig.~\ref{fig:people_det}). Using
 active near-infrared stereo vision, RefleX detects and locates the reflective markers on the safety
-garments in order to estimate position and relative velocity of the observed person, and infer
+garments in order to estimate position and relative velocity of the observed person, and to infer
 further body pose information. The underlying sensing principle thereby ensures that the detection
 performance is nearly independent of external illumination conditions. A classification of the
 observed reflective patterns further allows the APPLE system to discriminate between a worker's
