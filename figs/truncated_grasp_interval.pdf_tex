@@ -51,7 +51,7 @@
   \begin{picture}(1,1.00418396)%
     \put(0,0){\includegraphics[width=\unitlength]{figs/truncated_grasp_interval.pdf}}%
     \put(0.95036337,0.75189365){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$y$}}}%
-    \put(0.68892286,0.74244017){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$x$}}}%
+    \put(0.68892286,0.74244017){\color[rgb]{1,1,1}\makebox(0,0)[lb]{\smash{$x$}}}%
     \put(0.83007838,0.95038792){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$z$}}}%
     \put(0.81047323,0.80575793){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$o$}}}%
     \put(0.38755204,0.60761965){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$r_2$}}}%
